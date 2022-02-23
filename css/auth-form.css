@@ -15,13 +15,13 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fff;
+    background: #123456;
 }
 
 .auth__container {
     width: 480px;
     padding: 40px;
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.08), 0px 9px 14px rgba(0, 0, 0, 0.12), 0px 40px 72px rgba(0, 0, 0, 0.2);
     border-radius: 16px;
 }
@@ -37,7 +37,7 @@ a {
 .auth__link {
     padding: 0 5px;
     text-transform: uppercase;
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
@@ -78,8 +78,8 @@ a {
     cursor: pointer;
 }
 
-.auth__eye::before{
-    content: '';
+.auth__eye::before {
+    content: "";
     display: block;
     width: 20px;
     height: 12px;
@@ -97,7 +97,7 @@ a {
 .auth__label span:first-child {
     padding: 0 8px;
     text-transform: uppercase;
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
@@ -106,17 +106,18 @@ a {
     color: #000000;
 }
 
-.auth__label input[type=text],
-.auth__label input[type=password],
-.auth__label input[type=email] {
+.auth__label input[type="text"],
+.auth__label input[type="password"],
+.auth__label input[type="email"] {
     width: 100%;
     height: 48px;
     margin: 5px 0 0 0;
     padding: 0 10px;
-    background: #FFFFFF;
+    background: #ffffff;
     border: none;
     outline: none;
-    box-shadow: 0px 0px 0px 1px rgba(151, 151, 151, 0.08), 0px 1px 3px rgba(151, 151, 151, 0.12), 0px 1px 24px rgba(151, 151, 151, 0.21);
+    box-shadow: 0px 0px 0px 1px rgba(151, 151, 151, 0.08), 0px 1px 3px rgba(151, 151, 151, 0.12),
+        0px 1px 24px rgba(151, 151, 151, 0.21);
     border-radius: 8px;
     font-family: Arial, sans-serif;
     font-style: normal;
@@ -126,30 +127,33 @@ a {
     color: #979797;
 }
 
-.auth__label.is-error input[type=text],
-.auth__label.is-error input[type=password],
-.auth__label.is-error input[type=email] { border: 1px solid #EC2828; color: #EC2828; }
+.auth__label.is-error input[type="text"],
+.auth__label.is-error input[type="password"],
+.auth__label.is-error input[type="email"] {
+    border: 1px solid #ec2828;
+    color: #ec2828;
+}
 
 .auth__checkbox {
     cursor: pointer;
 }
 
 .auth__checkbox input {
-    width: 0!important;
-    height: 0!important;
-    position: fixed!important;
-    z-index: -999999!important;
-    opacity: 0!important;
-    appearance: none!important;
-    -moz-appearance: none!important;
-    -webkit-appearance: none!important;
+    width: 0 !important;
+    height: 0 !important;
+    position: fixed !important;
+    z-index: -999999 !important;
+    opacity: 0 !important;
+    appearance: none !important;
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
 }
 
 .auth__checkbox span {
     padding: 0;
     display: flex;
     align-items: center;
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -158,7 +162,7 @@ a {
 }
 
 .auth__checkbox span::before {
-    content: '';
+    content: "";
     display: block;
     width: 20px;
     height: 20px;
@@ -186,31 +190,33 @@ a {
     outline: none;
     border-radius: 14px;
     cursor: pointer;
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
     line-height: 24px;
     text-align: center;
-    color: #FFFFFF;
+    color: #ffffff;
 }
-.auth__btn:hover {filter: brightness(1.15);}
+.auth__btn:hover {
+    filter: brightness(1.15);
+}
 
 .auth__btn a {
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
     line-height: 24px;
     text-align: center;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .auth__forgot {
     display: block;
     margin: 30px 0 0 0;
     text-align: center;
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 12px;
@@ -222,18 +228,20 @@ a {
     display: none;
     align-items: center;
     padding-left: 8px;
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 12px;
     line-height: 24px;
-    color: #EC2828;
+    color: #ec2828;
 }
 
-.is-error .auth__error { display: flex; }
+.is-error .auth__error {
+    display: flex;
+}
 
 .auth__error::before {
-    content: '';
+    content: "";
     display: block;
     width: 18px;
     height: 18px;
@@ -244,11 +252,11 @@ a {
     background-position: center;
 }
 
-.auth__form.error .auth__label input[type=text],
-.auth__form.error .auth__label input[type=password],
-.auth__form.error .auth__label input[type=email] {
-    border: 1px solid #EC2828;
-    color: #EC2828;
+.auth__form.error .auth__label input[type="text"],
+.auth__form.error .auth__label input[type="password"],
+.auth__form.error .auth__label input[type="email"] {
+    border: 1px solid #ec2828;
+    color: #ec2828;
 }
 
 .auth__form.error > .auth__error {
@@ -269,10 +277,21 @@ a {
         padding: 20px;
     }
 
-    .auth__menu { width: 100%; justify-content: space-around; }
-    .auth__form { padding: 30px 0 20px 0; }
-    .auth__label input[type=text], .auth__label input[type=password], .auth__label input[type=email] { height: 36px;}
-    .auth__checkbox span { font-size: 12px; }
+    .auth__menu {
+        width: 100%;
+        justify-content: space-around;
+    }
+    .auth__form {
+        padding: 30px 0 20px 0;
+    }
+    .auth__label input[type="text"],
+    .auth__label input[type="password"],
+    .auth__label input[type="email"] {
+        height: 36px;
+    }
+    .auth__checkbox span {
+        font-size: 12px;
+    }
 
     .auth__btn {
         width: 100px;

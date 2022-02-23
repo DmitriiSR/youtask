@@ -8,7 +8,7 @@
     <title>You task</title>
 </head>
 <body>
-    <h1>Добро пожаловать!</h1>
+    <h1>Добро пожаловать пидор!</h1>
 
 </body>
 </html>
