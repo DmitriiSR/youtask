@@ -7,62 +7,65 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Авторизация</title>
     <link rel="stylesheet" href="/css/auth-form.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="auth">
     <div class="auth__container">
         <div class="auth__logo"></div>
         <nav class="auth__menu">
-            <a href="#" class="auth__link active">Sign in</a>
-            <a href="#" class="auth__link">Sign up</a>
+            <a href="#" class="auth__link active">Вход</a>
+            <a href="#" class="auth__link">Регистрация</a>
         </nav>
         <div class="auth__body active">
             <form class="auth__form" action="" method="post" name="sign-in-form" id="signIn">
                 <label for="username" class="auth__label">
-                    <span>e-mail</span>
+                    <span>E-mail</span>
                     <input type="email" name="username" placeholder="">
                     <span class="auth__error"></span>
                 </label>
                 <label for="password" class="auth__label">
-                    <span>Password</span>
+                    <span>Пароль</span>
                     <input type="password" name="password" placeholder="">
                     <span class="auth__error"></span>
                     <span class="auth__eye"></span>
                 </label>
+                <a href="#" class="auth__forgot">Забыли пароль?</a>
                 <label for="checkbox" class="auth__checkbox">
                     <input type="checkbox" id="checkbox" class="auth__checkbox-input">
-                    <span class="auth__checkbox-span">Continue without authorization</span>
+                    <span class="auth__checkbox-span">Запомнить меня</span>
                 </label>
                 <span class="auth__error">Неверное имя пользователя или пароль</span>
-                <input type="submit" name="signInBtn" value="Sign In" class="auth__btn">
+                <input type="submit" name="signInBtn" value="Войти" class="auth__btn">
             </form>
-            <a href="#" class="auth__forgot">Forgot your password?</a>
         </div>
         <div class="auth__body">
             <form class="auth__form" action="" method="post" name="sign-up-form" id="signUp" style="padding-bottom: 0; border-bottom: none;">
                 <label for="username" class="auth__label">
-                    <span>Yur name</span>
+                    <span>Имя*</span>
                     <input class="" type="text" name="fullname" placeholder="">
                     <span class="auth__error"></span>
                 </label>
                 <label for="username" class="auth__label">
-                    <span>e-mail</span>
+                    <span>E-mail*</span>
                     <input type="email" name="username" placeholder="">
                     <span class="auth__error"></span>
                 </label>
                 <label for="password" class="auth__label">
-                    <span>Create password</span>
+                    <span>Придумайте пароль</span>
                     <input class="" type="password" name="passwordreg" placeholder="">
                     <span class="auth__error"></span>
                     <span class="auth__eye"></span>
                 </label>
                 <label for="password" class="auth__label">
-                    <span>Confirm password</span>
+                    <span>Подтвердите пароль</span>
                     <input class="" type="password" name="confirmpassword" placeholder="">
                     <span class="auth__error"></span>
                     <span class="auth__eye"></span>
                 </label>
-                <input type="submit" name="signUpBtn" value="Sign Up" class="auth__btn">
+                <input type="submit" name="signUpBtn" value="Регистрация" class="auth__btn">
             </form>
         </div>
     </div>
@@ -107,7 +110,9 @@
     })
 
 </script>
+
 <script>
+     // Запрос на авторизацию
     $(document).ready(function() {
         $('#signIn').submit(function(e) {
             e.preventDefault();
@@ -133,7 +138,7 @@
             });
         });
     });
-
+// Это запрос на регистрацию
     $(document).ready(function() {
         $('#signUp').submit(function(e) {
             e.preventDefault();
