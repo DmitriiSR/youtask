@@ -70,6 +70,9 @@
         </div>
     </div>
 </div>
+<script>
+    console.log(document.cookie);
+</script>
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <script src="js/auth.js"></script>
 <script>
@@ -112,61 +115,7 @@
 </script>
 
 <script>
-     // Запрос на авторизацию
-    $(document).ready(function() {
-        $('#signIn').submit(function(e) {
-            e.preventDefault();
-            $.ajax({
-                type: "POST",
-                url: '/engine/sign-in.php',
-                data: $(this).serialize(),
-                success: function(response)
-                {
-                    var jsonData = JSON.parse(response);
 
-                    // user is logged in successfully in the back-end
-                    // let's redirect
-                    if (jsonData.success == "1")
-                    {
-                        location.href = 'index.php';
-                    }
-                    else
-                    {
-                        signInForm.classList.add('error');
-                    }
-                }
-            });
-        });
-    });
-// Это запрос на регистрацию
-    $(document).ready(function() {
-        $('#signUp').submit(function(e) {
-            e.preventDefault();
-            $.ajax({
-                type: "POST",
-                url: '/engine/sign-up.php',
-                data: $(this).serialize(),
-                success: function(response)
-                {
-                    var jsonData = JSON.parse(response);
-
-                    // user is logged in successfully in the back-end
-                    // let's redirect
-                    if (jsonData.success == "1")
-                    {
-                        alert('Вы успешно зарегистрировались!');
-                        location.href = 'index.php';
-                    }
-                    else if (jsonData.error == "1")
-                    {
-                        alert('Такой пользователь уже существует! Введите другой e-mail.');
-                    } else {
-                        alert('Зарегестрироваться не удалось.');
-                    }
-                }
-            });
-        });
-    });
 </script>
 </body>
 </html>
