@@ -20,7 +20,10 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #53b6fd;
+    background: url(../images/auth-background.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .auth__container {
