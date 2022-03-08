@@ -6,7 +6,7 @@ setcookie("auth", $auth, time() - 2592000);
 <body>
 <div class="wrapper">
     <aside class="menu">
-        <svg class="icon" style="width: 139px; height: 45px; margin-bottom: 98px;" aria-hidden="true" focusable="false">
+        <svg class="icon" style="width: 174px; height: 57px; margin-bottom: 98px; padding-left: 38px;" aria-hidden="true" focusable="false">
             <use href="images/sprite.svg#logo-blue-transparent"></use>
         </svg>
         <nav class="menu__navigation">
@@ -70,14 +70,29 @@ setcookie("auth", $auth, time() - 2592000);
             </a>
         </div>
     </aside>
-    <div class="section__wrapper">
-        <section class="overdue-tasks"></section>
-        <div class="right-sections">
-            <section class="my-projects"></section>
+    <main class="section__wrapper">
+    <header class="header">
+        <a href="">Главная</a>
+        <time id='date'>2 марта 2022, среда</time>
+    </header>
+    <div class="section__block">
+        <section class="overdue-tasks">
+            <div class="overdue-tasks-inner">
+                <img src="images/home/overdue-tasks-background.png" alt="">
+            </div>
+        </section>
+        <section class="right-sections">
+            <section class="my-projects">
+                <div class="my-projects-inner">
+                    <img src="images/home/my-projects-background.png" alt="">
+                </div>
+            </section>
             <section class="chat"></section>
-        </div>
-    </div>
+        </section>
+
+    </main>
 </div>
+<script src="js/home.js"></script>
 </body>
 </html>
 

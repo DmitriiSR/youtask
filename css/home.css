@@ -10,9 +10,9 @@
 }
 
 .menu {
-    width: 305px;
+    min-width: 305px;
     height: 100vh;
-    padding: 35px 42px 40px 38px;
+    padding: 35px 0px 38px 0px;
     display: flex;
     flex-direction: column;
     background-color: #fff;
@@ -21,14 +21,31 @@
 
 .menu__list a {
     display: flex;
+    padding-left: 38px;
 }
 
 .menu__navigation li {
-    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    height: 56px;
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
     color: #53b6fd;
+}
+
+.menu__navigation li:hover::before {
+    display: block;
+}
+
+.menu__navigation li::before {
+    content: "";
+    display: none;
+    width: 9px;
+    height: 41px;
+    background: url(../images/home/marker-blue.png);
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .menu__navigation svg {
@@ -37,6 +54,8 @@
 
 .menu__active-user {
     margin-top: auto;
+    padding-left: 38px;
+    padding-right: 42px;
 }
 
 .menu__active-user a {
@@ -49,23 +68,43 @@
     color: #53b6fd;
 }
 
-.section__wrapper {
+.header {
     width: 100%;
     display: flex;
-    justify-content: space-around;
-    margin: auto;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 27px;
+    line-height: 33px;
+    color: #53b6fd;
+}
+
+.section__wrapper {
+    width: 965px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 42px 0 51px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.section__block {
+    width: 100%;
+    height: 78%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .overdue-tasks {
-    width: 32%;
-    height: 606px;
+    width: 470px;
+    padding: 17px 23px 37px 17px;
     background-color: #ffffff;
     box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25);
     border-radius: 21px;
 }
 
 .right-sections {
-    width: 32%;
+    width: 458px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -73,6 +112,7 @@
 
 .my-projects {
     height: 413px;
+    padding: 17px 17px 17px 20px;
     background-color: #ffffff;
     box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25);
     border-radius: 21px;
