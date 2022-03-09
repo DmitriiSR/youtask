@@ -3,6 +3,7 @@ if (!$_COOKIE['auth_user']) {
     $newurl = '';
     header('location: http://youtask/auth.php');
 }
+
 ?>
 <!doctype html>
 <html lang="ru">

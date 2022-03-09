@@ -102,6 +102,7 @@ $(document).ready(function() {
                 if (jsonData.success == "1")
                 {
                     document.cookie = "auth_user=true; path=http://youtask/";
+                    document.cookie = "username=" + jsonData.username + "; path=http://youtask/";
                     location.href = 'index.php';
                 }
                 else

@@ -17,9 +17,8 @@ if (isset($_POST['username']) && $_POST['username'] && isset($_POST['password'])
     if ($usersTable -> num_rows > 0) {
         while($row = $usersTable -> fetch_assoc()) {
             if ($row['useremail'] === $useremail && $row['userpass'] === $userpass) {
-                $userid = 500;
-                setcookie("user_id", $userid, time() + 2592000);
-                echo json_encode(array('success' => 1));
+                $username = $row['username'];
+                echo json_encode(array('success' => 1, 'username' => $username));
                 $mysql -> close();
                 exit;
             }

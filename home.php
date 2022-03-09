@@ -66,7 +66,7 @@ setcookie("auth", $auth, time() - 2592000);
             <svg class="icon" style="width:27px; height: 27px;" aria-hidden="true" focusable="false">
                     <use href="images/sprite.svg#user-blue"></use>
                 </svg>
-                <span> Юлия Чернолихова</span>
+                <span><?php echo $_COOKIE["username"]?></span>
             </a>
         </div>
     </aside>
