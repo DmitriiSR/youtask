@@ -1,3 +1,39 @@
+
+// Переключение между окнами Войти/Зарегистрироваться
+
+const switchBtnList = document.querySelectorAll('.auth__link');
+const formsList = document.querySelectorAll('.auth__body');
+
+let toggleFormClass = function () {
+
+    if (!this.classList.contains('active')) {
+        switchBtnList.forEach((item) => item.classList.remove('active'));
+        formsList.forEach(function (item) {
+            !item.classList.contains('active') ? item.classList.add('active') : item.classList.remove('active');
+        });
+        this.classList.add('active');
+    }
+}
+
+switchBtnList.forEach(function (item) {
+    item.addEventListener("click", toggleFormClass);
+})
+
+
+
+// Маска пароля
+
+const eyeBtnList = document.querySelectorAll('.auth__eye');
+
+let toggleInputAttr = function () {
+    this.classList.toggle('active');
+    this.parentElement.querySelector('input').type === 'password' ? this.parentElement.querySelector('input').type = 'text' : this.parentElement.querySelector('input').type = 'password';
+}
+
+eyeBtnList.forEach(function (item) {
+    item.addEventListener("click", toggleInputAttr)
+})
+
 // Валидация
 
 const signUpForm = document.forms['sign-up-form'];
