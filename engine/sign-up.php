@@ -24,7 +24,7 @@ if (isset($_POST['username']) && $_POST['username'] && isset($_POST['passwordreg
 
     $mysql -> query("INSERT INTO `users`(`username`, `useremail`, `userpass`) VALUES ('$username', '$useremail', '$userpass')");
 
-    echo json_encode(array('success' => 1));
+    echo json_encode(array('success' => 1, 'username' => $username));
 
     $mysql -> close();
 
