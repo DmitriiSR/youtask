@@ -5,89 +5,60 @@ setcookie("auth", $auth, time() - 2592000);
 ?>
 <body>
 <div class="wrapper">
-    <aside class="menu">
-        <svg class="icon" style="width: 174px; height: 57px; margin-bottom: 98px; padding-left: 38px;" aria-hidden="true" focusable="false">
-            <use href="images/sprite.svg#logo-blue-transparent"></use>
-        </svg>
-        <nav class="menu__navigation">
-        <ul class="menu__list">
-            <li>
-                <a href="">
-                    <svg class="icon" aria-hidden="true" focusable="false">
-                        <use href="images/sprite.svg#icon-home"></use>
-                    </svg>
-                    <span>Главная</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <svg class="icon" aria-hidden="true" focusable="false">
-                        <use href="images/sprite.svg#icon-task"></use>
-                    </svg>
-                    <span>Мои задачи</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <svg class="icon" aria-hidden="true" focusable="false">
-                        <use href="images/sprite.svg#icon-projects"></use>
-                    </svg>
-                    <span>Проекты</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <svg class="icon" aria-hidden="true" focusable="false">
-                        <use href="images/sprite.svg#icon-team"></use>
-                    </svg>
-                    <span>Команда</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <svg class="icon" aria-hidden="true" focusable="false">
-                        <use href="images/sprite.svg#icon-notifications"></use>
-                    </svg>
-                    <span>Уведомления</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <svg class="icon" aria-hidden="true" focusable="false">
-                        <use href="images/sprite.svg#icon-message"></use>
-                    </svg>
-                    <span>Чат</span> 
-                </a>
-            </li>
-        </ul>
-        </nav>
-        <div class="menu__active-user">
-            <a href="">
-            <svg class="icon" style="width:27px; height: 27px;" aria-hidden="true" focusable="false">
-                    <use href="images/sprite.svg#user-blue"></use>
-                </svg>
-                <span><?php echo $_COOKIE["username"]?></span>
-            </a>
-        </div>
-    </aside>
-    <main class="section__wrapper">
-    <header class="header">
+<header class="header">
         <a href="">Главная</a>
         <time id='date'>2 марта 2022, среда</time>
     </header>
+    <?php require_once "components/sidebar.php"?>
+    <main class="section__wrapper">
     <div class="section__block">
         <section class="overdue-tasks">
             <div class="overdue-tasks-inner">
-                <img src="images/home/overdue-tasks-background.png" alt="">
+            <img src="images/home/overdue-tasks-background.png" alt="">
+                <h1>Просроченные задачи</h1>
+                <div class="no-tasks">
+                    <svg class="icon" style="width:85px; height:85px; margin-bottom: 11px;" aria-hidden="true" focusable="false">
+                        <use href="images/sprite.svg#icon-smile"></use>
+                    </svg>
+                    <span>У Вас нет просроченных задач</span>
+                </div>
+                <a href="" class="btn">Показать ещё</a>
             </div>
         </section>
         <section class="right-sections">
             <section class="my-projects">
                 <div class="my-projects-inner">
                     <img src="images/home/my-projects-background.png" alt="">
+                    <h1>Мои проекты</h1>
+                    <div class="no-tasks">
+                        <svg class="icon" style="width:70px; height:70px; margin-bottom: 11px;" aria-hidden="true" focusable="false">
+                            <use href="images/sprite.svg#icon-note"></use>
+                        </svg>
+                        <span>У Вас пока нет актуальных проектов</span>
+                    </div>
+                    <a href="" class="btn">Показать ещё</a>
                 </div>
             </section>
-            <section class="chat"></section>
+            <section class="chat">
+                <h1>Чат</h1>
+                <div class="chat__inner">
+                    <a href="">
+                        <svg class="icon" style="width:61px; height:61px;" aria-hidden="true" focusable="false">
+                                <use href="images/sprite.svg#icon-add-blue"></use>
+                        </svg>
+                    </a>
+                    <a href="">
+                        <svg class="icon" style="width:61px; height:61px;" aria-hidden="true" focusable="false">
+                                <use href="images/sprite.svg#chat-yellow"></use>
+                        </svg>
+                    </a>
+                    <a href="">
+                        <svg class="icon" style="width:61px; height:61px;" aria-hidden="true" focusable="false">
+                            <use href="images/sprite.svg#chat-orange"></use>
+                        </svg>
+                    </a>
+                </div>
+            </section>
         </section>
 
     </main>

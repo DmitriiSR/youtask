@@ -1,3 +1,4 @@
+@import "sidebar.css";
 @import "home.css";
 
 * {
@@ -22,4 +23,22 @@ img {
 
 ul li {
     list-style: none;
+}
+
+.btn {
+    display: inline-block;
+    width: 156px;
+    height: 44px;
+    background-color: #53b6fd;
+    border-radius: 7px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 44px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.btn:hover {
+    background: rgba(83, 182, 253, 0.21);
+    color: #53b6fd;
 }

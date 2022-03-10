@@ -1,0 +1,54 @@
+.menu {
+    min-width: 305px;
+    height: 100vh;
+    padding: 35px 0px 38px 0px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.menu__list a {
+    display: flex;
+    padding-left: 38px;
+}
+
+.menu__navigation li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 56px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #53b6fd;
+}
+
+.menu__navigation svg {
+    margin-right: 12px;
+}
+
+.menu__active-user {
+    margin-top: auto;
+    padding-left: 38px;
+    padding-right: 42px;
+}
+
+.menu__active-user a {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #53b6fd;
+}
+
+/*Выделяет активный пункт сайдбара*/
+.is-marked {
+    position: absolute;
+    width: 9px;
+    height: 41px;
+    background: url(../images/home/marker-blue.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
