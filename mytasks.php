@@ -26,20 +26,35 @@ setcookie("auth", $auth, time() - 2592000);
                 </div>
             </header>
             <div>
-                <button class="addtaskbtn" data-bind="click: function () {viewModel.addTaskVisible(!viewModel.addTaskVisible())}" style="padding: 10px; background: transparent; margin-top:15px;">Добавить задачу</button>
+                <button class="addtaskbtn" data-bind="click: function () {
+                            viewModel.taskTitle('');
+                            viewModel.taskDate('');
+                            viewModel.addTaskVisible(!viewModel.addTaskVisible());
+                }" style="padding: 10px; background: transparent; margin-top:15px;">Добавить задачу</button>
                 <div class="addtask" data-bind="visible: viewModel.addTaskVisible" style="display: flex; flex-direction: column; padding: 20px; background: #ffffff; border-radius: 17px;  box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25); position: absolute; width:max-content;">
                     <label style="margin-bottom: 20px">
-                        <input type="text" placeholder="Название задачи">
+                        <input data-bind="value: viewModel.taskTitle;" type="text" placeholder="Название задачи">
                     </label>
                     <label>
-                        <input type="date" placeholder="Закончить к">
+                        <input data-bind="value: viewModel.taskDate;" type="date" placeholder="Закончить к">
                     </label>
                     <div>
-                        <button style="padding: 10px; background: transparent; margin-top:15px;">Отменить</button>
-                        <button style="padding: 10px; background: transparent; margin-top:15px;">Добавить</button>
+                        <button data-bind="click: function () {viewModel.addTaskVisible(false)};" style="padding: 10px; background: transparent; margin-top:15px;">Отменить</button>
+                        <button data-bind="click: function() {
+                                        viewModel.addTask();
+                                        viewModel.addTaskVisible(false);
+                        }" style="padding: 10px; background: transparent; margin-top:15px;">Добавить</button>
                     </div>
                 </div>
             </div>
+            <!-- ko foreach: viewModel.tasksArray -->
+                <div class="" style="margin-top: 30px">
+                    <div class="">
+                        <h2 data-bind="text: title"></h2>
+                        <span data-bind="text: date"></span>
+                    </div>
+                </div>
+            <!-- /ko -->
 
         </div>
     </section>
@@ -49,8 +64,14 @@ setcookie("auth", $auth, time() - 2592000);
         viewModel.popupVisible = ko.observable(false);
         viewModel.addTaskVisible = ko.observable(false);
         viewModel.tasksArray = ko.observableArray([]);
+        viewModel.taskTitle = ko.observable();
+        viewModel.taskDate = ko.observable();
         viewModel.addTask = function () {
             var task = {};
+            task.title = viewModel.taskTitle();
+            task.date = viewModel.taskDate();
+            viewModel.tasksArray.push(task);
+            console.log(viewModel.tasksArray());
         }
     </script>
     <script>
