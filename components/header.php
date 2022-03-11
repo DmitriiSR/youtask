@@ -21,6 +21,7 @@ if (!$_COOKIE['auth_user']) {
 <body>
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <script src="js/knockout-3.5.1.js"></script>
+
 <script>
     if ('viewModel' in window) {
     } else {

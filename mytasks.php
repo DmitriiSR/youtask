@@ -18,10 +18,22 @@ setcookie("auth", $auth, time() - 2592000);
                 <span>Задачи</span>
                 <span>Все задачи</span>
             </header>
+                <button data-bind="click: function () { viewModel.popupVisible(!viewModel.popupVisible()) }">view</button>
+                <div data-bind="visible: viewModel.popupVisible" class="" style="width: 300px; height: 100px; background-color: #ccc;"></div>
+
+             <!-- ko foreach: viewModel.tasksArr -->
+                   <div class="">
+                       <h2 data-bind="text: data">12.05.0892</h2>
+                       <p data-bind="text: text">alsdkfbasdlkcnsadkcn aslkdbca</p>
+                   </div>
+              <!-- /ko -->
+            <button data-bind="click: function () { viewModel.createTask() }">дОБАВИТЬ</button>
 
         </div>
     </section>
     </main>
 
-    <script src="js/main.js"></script>
-</body>
+    <script>
+
+    </script>
+<?php require_once "components/footer.php"?>
