@@ -14,26 +14,66 @@ setcookie("auth", $auth, time() - 2592000);
     <section class="tasks">
         <img src="images/mytasks/mytasks-block-background.png" alt="">
         <div class="tasks__inner">
-            <header class="tasks__header">
+            <header class="tasks__header" style="display: flex; justify-content: space-between;">
                 <span>Задачи</span>
-                <span>Все задачи</span>
+                <div style="position: relative;">
+                    <span id="tasksFilterBtn" data-bind="click: function () {viewModel.popupVisible(!viewModel.popupVisible())}" style="margin-left: auto; cursor: pointer;">Все задачи</span>
+                    <div id="taskFilterPopup" data-bind="visible: viewModel.popupVisible" style="width: max-content; position: absolute; top: 120%; right: 0; padding: 20px 30px; background: #ffffff; border-radius: 17px;  box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25);">
+                        <a href="" style="display: block; padding-bottom: 20px;">Все задачи</a>
+                        <a href="" style="display: block; padding-bottom: 20px;">Выполненные задачи</a>
+                        <a href="" style="display: block;">Просроченные задачи</a>
+                    </div>
+                </div>
             </header>
-                <button data-bind="click: function () { viewModel.popupVisible(!viewModel.popupVisible()) }">view</button>
-                <div data-bind="visible: viewModel.popupVisible" class="" style="width: 300px; height: 100px; background-color: #ccc;"></div>
-
-             <!-- ko foreach: viewModel.tasksArr -->
-                   <div class="">
-                       <h2 data-bind="text: data">12.05.0892</h2>
-                       <p data-bind="text: text">alsdkfbasdlkcnsadkcn aslkdbca</p>
-                   </div>
-              <!-- /ko -->
-            <button data-bind="click: function () { viewModel.createTask() }">дОБАВИТЬ</button>
+            <div>
+                <button class="addtaskbtn" data-bind="click: function () {viewModel.addTaskVisible(!viewModel.addTaskVisible())}" style="padding: 10px; background: transparent; margin-top:15px;">Добавить задачу</button>
+                <div class="addtask" data-bind="visible: viewModel.addTaskVisible" style="display: flex; flex-direction: column; padding: 20px; background: #ffffff; border-radius: 17px;  box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25); position: absolute; width:max-content;">
+                    <label style="margin-bottom: 20px">
+                        <input type="text" placeholder="Название задачи">
+                    </label>
+                    <label>
+                        <input type="date" placeholder="Закончить к">
+                    </label>
+                    <div>
+                        <button style="padding: 10px; background: transparent; margin-top:15px;">Отменить</button>
+                        <button style="padding: 10px; background: transparent; margin-top:15px;">Добавить</button>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </section>
     </main>
 
     <script>
+        viewModel.popupVisible = ko.observable(false);
+        viewModel.addTaskVisible = ko.observable(false);
+        viewModel.tasksArray = ko.observableArray([]);
+        viewModel.addTask = function () {
+            var task = {};
+        }
+    </script>
+    <script>
+        $(document).click(function (e) {
+            let popup = $('.addtask');
+            let btn = $('.addtaskbtn');
 
+            if ( ! btn.is(e.target) && btn.has(e.target).length === 0 &&
+                ! popup.is(e.target) && popup.has(e.target).length === 0
+            ) {
+                viewModel.addTaskVisible(false);
+            }
+        });
+
+        $(document).click(function (e) {
+            let popup = $('#taskFilterPopup');
+            let btn = $('#tasksFilterBtn');
+
+            if ( ! btn.is(e.target) && btn.has(e.target).length === 0 &&
+                ! popup.is(e.target) && popup.has(e.target).length === 0
+            ) {
+                viewModel.popupVisible(false);
+            }
+        });
     </script>
 <?php require_once "components/footer.php"?>
