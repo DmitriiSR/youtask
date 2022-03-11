@@ -19,7 +19,6 @@
 
     function get() {
         let newObj = JSON.parse(JSON.stringify(window.mainObj[0]));
-        document.getElementById('text').innerText = newObj;
         newObj.taskdate = '05.01.1990';
         newObj.tasktext = 'test';
         newObj.tasktime = '10:10';

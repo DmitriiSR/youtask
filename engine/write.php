@@ -27,5 +27,5 @@ if ($_POST) {
 
     $mysql -> query($insertquery);
 
-
+    echo json_encode(array('success' => 0));
 }
