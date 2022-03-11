@@ -63,7 +63,7 @@ setcookie("auth", $auth, time() - 2592000);
 
     </main>
 </div>
-<script src="js/home.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
 

@@ -1,5 +1,6 @@
 @import "sidebar.css";
 @import "home.css";
+@import "mytasks.css";
 
 * {
     margin: 0;

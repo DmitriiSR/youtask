@@ -5,7 +5,7 @@
         <nav class="menu__navigation">
         <ul class="menu__list">
             <li class="is-marked">
-                <a href="">
+                <a href="home.php">
                     <svg class="icon" aria-hidden="true" focusable="false">
                         <use href="images/sprite.svg#icon-home"></use>
                     </svg>
@@ -13,11 +13,11 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="mytasks.php">
                     <svg class="icon" aria-hidden="true" focusable="false">
                         <use href="images/sprite.svg#icon-task"></use>
                     </svg>
-                    <span>Мои задачи</span>
+                    <span>Мои задачи</a></span>
                 </a>
             </li>
             <li>
