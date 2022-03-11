@@ -103,6 +103,7 @@ $(document).ready(function() {
                 {
                     document.cookie = "auth_user=true; path=http://youtask/";
                     document.cookie = "username=" + jsonData.username + "; path=http://youtask/";
+                    document.cookie = "userid=" + jsonData.userid + "; path=http://youtask/";
                     location.href = 'index.php';
                 }
                 else
@@ -131,6 +132,7 @@ $(document).ready(function() {
                 {
                     document.cookie = "auth_user=true; path=http://youtask/";
                     document.cookie = "username=" + jsonData.username + "; path=http://youtask/";
+                    document.cookie = "userid=" + jsonData.userid + "; path=http://youtask/";
                     location.href = 'index.php';
                 }
                 else if (jsonData.error == "1")
