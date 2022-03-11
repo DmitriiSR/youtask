@@ -18,7 +18,7 @@ if (isset($_POST['username']) && $_POST['username'] && isset($_POST['password'])
         while($row = $usersTable -> fetch_assoc()) {
             if ($row['useremail'] === $useremail && $row['userpass'] === $userpass) {
                 $username = $row['username'];
-                echo json_encode(array('success' => 1, 'username' => $username));
+                echo json_encode(array('success' => 1, 'username' => $username, 'userid' => $row['id']));
                 $mysql -> close();
                 exit;
             }

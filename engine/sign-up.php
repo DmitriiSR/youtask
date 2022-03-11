@@ -24,7 +24,13 @@ if (isset($_POST['username']) && $_POST['username'] && isset($_POST['passwordreg
 
     $mysql -> query("INSERT INTO `users`(`username`, `useremail`, `userpass`) VALUES ('$username', '$useremail', '$userpass')");
 
-    echo json_encode(array('success' => 1, 'username' => $username));
+    $query = "SELECT `id`, `username`, `useremail`, `userpass`, `userdate` FROM `users` WHERE `useremail` = '".$useremail."'";
+
+    $userid = $mysql -> query($query);
+
+    while($row2 = $userid -> fetch_assoc()) {
+        echo json_encode(array('success' => 1, 'username' => $username, 'userid' => $row2['id']));
+    }
 
     $mysql -> close();
 
