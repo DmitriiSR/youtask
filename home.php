@@ -3,7 +3,7 @@
 $auth = true;
 setcookie("auth", $auth, time() - 2592000);
 ?>
-<body>
+
 <div class="wrapper">
 <header class="header">
         <a href="">Главная</a>
@@ -64,8 +64,7 @@ setcookie("auth", $auth, time() - 2592000);
     </main>
 </div>
 <script src="js/main.js"></script>
-</body>
-</html>
+<?php require_once "components/footer.php"?>
 
 
 

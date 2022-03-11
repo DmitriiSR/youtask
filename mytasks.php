@@ -24,5 +24,4 @@ setcookie("auth", $auth, time() - 2592000);
     </main>
 
     <script src="js/main.js"></script>
-    <script stc="js/knockout-3.5.1.js"></script>
 </body>

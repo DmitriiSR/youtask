@@ -11,8 +11,25 @@
 <button id="btn">test</button>
 <button id="btn2" style="margin: 20px">записать</button>
 
-<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<div data-bind="visible: viewModel.test" style="width: 300px; height: 100px; background-color: #ccc;"></div>
+<button data-bind="click: () => viewModel.test(true)" style="padding: 10px; margin-top: 15px;">View</button>
+
+
 <script src="js/main.js"></script>
+
+
+<script>
+    viewModel.test = ko.observable(false);
+</script>
+
+
+
+
+
+
+
+
+
 <script>
     let button = document.getElementById('btn');
     button.addEventListener('click', () => getObj('tasks'));
@@ -32,5 +49,5 @@
     button2.addEventListener('click',() => setObj(get()));
 
 </script>
-</body>
-</html>
+
+<?php require_once "components/footer.php"?>
