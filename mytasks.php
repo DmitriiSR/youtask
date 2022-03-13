@@ -26,12 +26,17 @@ setcookie("auth", $auth, time() - 2592000);
                 </div>
             </header>
             <div>
-                <button class="addtaskbtn" data-bind="click: function () {
-                            viewModel.taskTitle('');
-                            viewModel.taskDate('');
-                            viewModel.addTaskVisible(!viewModel.addTaskVisible());
-                }" style="padding: 10px; background: transparent; margin-top:15px;">Добавить задачу</button>
-                <div class="addtask" data-bind="visible: viewModel.addTaskVisible" style="display: flex; flex-direction: column; padding: 20px; background: #ffffff; border-radius: 17px;  box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25); position: absolute; width:max-content;">
+                <div class="" style="margin-top: 15px;">
+                    <button class="addtaskbtn" data-bind="click: function () {
+                                viewModel.taskTitle('');
+                                viewModel.taskDate('');
+                                viewModel.addTaskVisible(!viewModel.addTaskVisible());
+                    }"><svg class="icon" style="margin-right: 13px;" aria-hidden="true" focusable="false">
+                        <use href="images/sprite.svg#icon-add"></use>
+                    </svg>Добавить задачу</button>
+                    </div>
+                    <div class="addtask" data-bind="visible: viewModel.addTaskVisible" style="display: flex; flex-direction: column; padding: 20px; background: #ffffff; border-radius: 17px;  box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25); position: absolute; width:max-content;">
+                
                     <label style="margin-bottom: 20px">
                         <input data-bind="value: viewModel.taskTitle;" type="text" placeholder="Название задачи">
                     </label>
@@ -48,10 +53,24 @@ setcookie("auth", $auth, time() - 2592000);
                 </div>
             </div>
             <!-- ko foreach: viewModel.tasksArray -->
-                <div class="" style="margin-top: 30px">
-                    <div class="">
-                        <h2 data-bind="text: title"></h2>
+                <div class="" style="margin-top: 30px; position: relative;">
+                    <div class="task">
+                        <div style="display: flex; align-items: center;">
+                            <svg class="icon" style="margin-right: 13px;" aria-hidden="true" focusable="false">
+                                <use href="images/sprite.svg#icon-dobe-black"></use>
+                            </svg>
+                            <h2 data-bind="text: title" style="font-weight: 400; font-size: 16px; line-height: 20px; color: #000000;"></h2>
+                        </div>
                         <span data-bind="text: date"></span>
+                        <div class="task-edit">
+                            <svg class="icon" id="taskEdit" aria-hidden="true" focusable="false" style="cursor: pointer;" id="taskEdit" data-bind="click: function () {viewModel.taskEditPopup(!viewModel.taskEditPopup())}">
+                                <use href="images/sprite.svg#icon-task-edit"></use>
+                            </svg>
+                            <div id="taskEditPopup" data-bind="visible: viewModel.taskEditPopup" style="width: max-content; position: absolute; top: 0; right: 3%; padding: 20px 30px; background: #ffffff; border-radius: 17px;  box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25);">
+                                <a href="" style="display: block; padding-bottom: 20px;">Редактировать</a>
+                                <a href="" style="display: block;">Удалить</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             <!-- /ko -->
@@ -63,6 +82,7 @@ setcookie("auth", $auth, time() - 2592000);
     <script>
         viewModel.popupVisible = ko.observable(false);
         viewModel.addTaskVisible = ko.observable(false);
+        viewModel.taskEditPopup = ko.observable(false);
         viewModel.tasksArray = ko.observableArray([]);
         viewModel.taskTitle = ko.observable();
         viewModel.taskDate = ko.observable();
@@ -94,6 +114,17 @@ setcookie("auth", $auth, time() - 2592000);
                 ! popup.is(e.target) && popup.has(e.target).length === 0
             ) {
                 viewModel.popupVisible(false);
+            }
+        });
+
+        $(document).click(function (e) {
+            let popup = $('#taskEditPopup');
+            let btn = $('#taskEdit');
+
+            if ( ! btn.is(e.target) && btn.has(e.target).length === 0 &&
+                ! popup.is(e.target) && popup.has(e.target).length === 0
+            ) {
+                viewModel.taskEditPopup(false);
             }
         });
     </script>

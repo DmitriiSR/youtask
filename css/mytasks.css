@@ -9,6 +9,21 @@
     background-position: right bottom;
 }
 
+.addtaskbtn {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #53b6fd;
+}
+
 .tasks {
     width: 969px;
     height: 100%;
@@ -16,4 +31,19 @@
     background-color: #ffffff;
     box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25);
     border-radius: 21px;
+}
+
+.tasks__header {
+    margin-top: 31px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #53b6fd;
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(83, 182, 253, 0.21);
+    padding-bottom: 14px;
 }
