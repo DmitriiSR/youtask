@@ -35,7 +35,7 @@ setcookie("auth", $auth, time() - 2592000);
                         <use href="images/sprite.svg#icon-add"></use>
                     </svg>Добавить задачу</button>
                     </div>
-                    <div class="addtask" data-bind="visible: viewModel.addTaskVisible" style="display: flex; flex-direction: column; padding: 20px; background: #ffffff; border-radius: 17px;  box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25); position: absolute; width:max-content; z-index: 999;">
+                    <div class="addtask" data-bind="visible: viewModel.addTaskVisible">
                 
                     <label style="margin-bottom: 20px">
                         <input id="inputText" data-bind="value: viewModel.taskTitle;" type="text" placeholder="Название задачи">
@@ -60,14 +60,34 @@ setcookie("auth", $auth, time() - 2592000);
                             </svg>
                             <h2 data-bind="text: title" style="font-weight: 400; font-size: 16px; line-height: 20px; color: #000000;"></h2>
                         </div>
-                        <span data-bind="text: date"></span>
+                        <span data-bind="text: date().split('-').reverse().join('.')"></span>
                         <div class="task-edit">
                             <svg class="icon task-edit-btn" aria-hidden="true" focusable="false" style="cursor: pointer;" id="taskEdit" data-bind="click: function () {visible(!visible())}">
                                 <use href="images/sprite.svg#icon-task-edit"></use>
                             </svg>
                             <div class="task-edit-popup" data-bind="visible: visible;" style="width: max-content; position: absolute; top: 0; right: 3%; padding: 20px 30px; background: #ffffff; border-radius: 17px;  box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25);">
-                                <a href="" style="display: block; padding-bottom: 20px;">Редактировать</a>
-                                <a href="" style="display: block;">Удалить</a>
+                                <a href="#" data-bind="click: function () {editVisible(true); visible(false);}" style="display: block; padding-bottom: 20px;">Редактировать</a>
+                                <a href="#" data-bind="click: function() {
+                                    warning(true);
+                                }" style="display: block;">Удалить</a>
+                            </div>
+                            <div data-bind="visible: warning" class="warning__wrapper">
+                                <div class="warning">
+                                    <h2 style="margin-bottom: 50px;">Вы уверены?</h2>
+                                    <a href="#" data-bind="click: function () {warning(false)}" class="btn">Нет</a>
+                                    <a href="#" data-bind="click: function () {viewModel.tasksArray.splice($index(), 1);}" class="btn" style="margin-left: auto;">Да</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="addtask" data-bind="visible: editVisible" style="top: 100%;">
+                            <label style="margin-bottom: 20px">
+                                <input data-bind="textInput: title" type="text" placeholder="Название задачи" required>
+                            </label>
+                            <label>
+                                <input data-bind="textInput: date" type="date" placeholder="Закончить к" required>
+                            </label>
+                            <div>
+                                <button data-bind="click: function () {editVisible(false)};" style="padding: 10px; background: transparent; margin-top:15px;">Ок</button>
                             </div>
                         </div>
                     </div>
@@ -90,14 +110,19 @@ setcookie("auth", $auth, time() - 2592000);
             let inputDate = document.getElementById('inputDate');
             if(inputText.value !== '' && inputDate.value !== '') {
                 var task = {};
-                task.title = viewModel.taskTitle();
-                task.date = viewModel.taskDate();
+                task.title = ko.observable(viewModel.taskTitle());
+                task.date = ko.observable(viewModel.taskDate());
                 task.visible = ko.observable(false);
+                task.editVisible = ko.observable(false);
+                task.warning = ko.observable(false);
                 viewModel.tasksArray.push(task);
                 viewModel.addTaskVisible(false);
             } else {
                 viewModel.addTaskVisible(false);
             }
+        }
+        viewModel.removeTask = function () {
+            console.log($data);
         }
     </script>
     <script>
