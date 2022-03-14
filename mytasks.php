@@ -35,19 +35,18 @@ setcookie("auth", $auth, time() - 2592000);
                         <use href="images/sprite.svg#icon-add"></use>
                     </svg>Добавить задачу</button>
                     </div>
-                    <div class="addtask" data-bind="visible: viewModel.addTaskVisible" style="display: flex; flex-direction: column; padding: 20px; background: #ffffff; border-radius: 17px;  box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25); position: absolute; width:max-content;">
+                    <div class="addtask" data-bind="visible: viewModel.addTaskVisible" style="display: flex; flex-direction: column; padding: 20px; background: #ffffff; border-radius: 17px;  box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25); position: absolute; width:max-content; z-index: 999;">
                 
                     <label style="margin-bottom: 20px">
-                        <input data-bind="value: viewModel.taskTitle;" type="text" placeholder="Название задачи">
+                        <input id="inputText" data-bind="value: viewModel.taskTitle;" type="text" placeholder="Название задачи">
                     </label>
                     <label>
-                        <input data-bind="value: viewModel.taskDate;" type="date" placeholder="Закончить к">
+                        <input id="inputDate" data-bind="value: viewModel.taskDate;" type="date" placeholder="Закончить к">
                     </label>
                     <div>
                         <button data-bind="click: function () {viewModel.addTaskVisible(false)};" style="padding: 10px; background: transparent; margin-top:15px;">Отменить</button>
                         <button data-bind="click: function() {
                                         viewModel.addTask();
-                                        viewModel.addTaskVisible(false);
                         }" style="padding: 10px; background: transparent; margin-top:15px;">Добавить</button>
                     </div>
                 </div>
@@ -63,10 +62,10 @@ setcookie("auth", $auth, time() - 2592000);
                         </div>
                         <span data-bind="text: date"></span>
                         <div class="task-edit">
-                            <svg class="icon" id="taskEdit" aria-hidden="true" focusable="false" style="cursor: pointer;" id="taskEdit" data-bind="click: function () {viewModel.taskEditPopup(!viewModel.taskEditPopup())}">
+                            <svg class="icon task-edit-btn" aria-hidden="true" focusable="false" style="cursor: pointer;" id="taskEdit" data-bind="click: function () {visible(!visible())}">
                                 <use href="images/sprite.svg#icon-task-edit"></use>
                             </svg>
-                            <div id="taskEditPopup" data-bind="visible: viewModel.taskEditPopup" style="width: max-content; position: absolute; top: 0; right: 3%; padding: 20px 30px; background: #ffffff; border-radius: 17px;  box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25);">
+                            <div class="task-edit-popup" data-bind="visible: visible;" style="width: max-content; position: absolute; top: 0; right: 3%; padding: 20px 30px; background: #ffffff; border-radius: 17px;  box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25);">
                                 <a href="" style="display: block; padding-bottom: 20px;">Редактировать</a>
                                 <a href="" style="display: block;">Удалить</a>
                             </div>
@@ -87,11 +86,18 @@ setcookie("auth", $auth, time() - 2592000);
         viewModel.taskTitle = ko.observable();
         viewModel.taskDate = ko.observable();
         viewModel.addTask = function () {
-            var task = {};
-            task.title = viewModel.taskTitle();
-            task.date = viewModel.taskDate();
-            viewModel.tasksArray.push(task);
-            console.log(viewModel.tasksArray());
+            let inputText = document.getElementById('inputText');
+            let inputDate = document.getElementById('inputDate');
+            if(inputText.value !== '' && inputDate.value !== '') {
+                var task = {};
+                task.title = viewModel.taskTitle();
+                task.date = viewModel.taskDate();
+                task.visible = ko.observable(false);
+                viewModel.tasksArray.push(task);
+                viewModel.addTaskVisible(false);
+            } else {
+                viewModel.addTaskVisible(false);
+            }
         }
     </script>
     <script>
@@ -118,13 +124,15 @@ setcookie("auth", $auth, time() - 2592000);
         });
 
         $(document).click(function (e) {
-            let popup = $('#taskEditPopup');
-            let btn = $('#taskEdit');
+            let popup = $('.task-edit-popup');
+            let btn = $('.task-edit-btn');
 
             if ( ! btn.is(e.target) && btn.has(e.target).length === 0 &&
                 ! popup.is(e.target) && popup.has(e.target).length === 0
             ) {
-                viewModel.taskEditPopup(false);
+                viewModel.tasksArray().forEach(function (item) {
+                    item.visible(false);
+                });
             }
         });
     </script>
