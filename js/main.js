@@ -1,6 +1,21 @@
+let cookieObj = {};
+let cookies = document.cookie.split('; ');
+for (let i = 0; i < cookies.length; i++) {
+    let cookie = cookies[i].split(/=/);
+    cookieObj[cookie[0]] = cookie[1];
+}
+
+if ('viewModel' in window) {
+} else {
+    viewModel = {};
+}
+
+
+setDbInViewModel('tasks');
+getDB('tasks');
+const storage = new Map();
 
 function setDbInViewModel () {
-
     for (let i = 0; i < arguments.length; i++) {
         viewModel[arguments[i]] = ko.observableArray([]);
     }
@@ -20,7 +35,30 @@ function getDB () {
             }
         });
     }
+}
 
+function newObj(name) {
+    let row = {};
+    let obj = viewModel[name]();
+    for (let key in obj[0]) {
+        row[key] = ko.observable('');
+    }
+    row.dbname = name;
+    row.id = '';
+    row.userid = +cookieObj.userid;
+    storage.set(name, row);
+}
+
+function set(obj) {
+    let row = {};
+    for (let key in obj) {
+        row[key] = obj[key]
+        if(typeof row[key] === "function") {
+            row[key] = row[key]();
+        }
+    }
+    viewModel[obj.dbname].push(obj);
+    setObj(row);
 }
 
 function getObj(data) {
@@ -30,7 +68,6 @@ function getObj(data) {
         data: data,
         success: function (response) {
             var jsonData = JSON.parse(response)[0];
-            console.log(jsonData);
         }
     });
 }
@@ -43,8 +80,6 @@ let setObj = function (data) {
         success: function(response)
         {
             var jsonData = JSON.parse(response);
-
-            console.log(jsonData);
         }
     });
 }

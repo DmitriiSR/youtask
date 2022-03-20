@@ -7,16 +7,16 @@ if ($_POST) {
         echo json_encode(array('success' => 0, 'Error Number: ' => $mysql->connect_errno, 'Error: ' => $mysql->connect_error));
     }
 
-    $dbname = $_POST[0];
+    $dbname = $_POST['dbname'];
 
     $keyarr = array();
     $valuearr = array();
 
-    for ($i = 2; $i < count($_POST); $i++) {
+    for ($i = 1; $i < count($_POST) - 1; $i++) {
         array_push($keyarr, array_keys($_POST)[$i]);
     }
 
-    for ($i = 2; $i < count($_POST); $i++) {
+    for ($i = 1; $i < count($_POST) - 1; $i++) {
         array_push($valuearr, $_POST[array_keys($_POST)[$i]]);
     }
 
@@ -24,6 +24,7 @@ if ($_POST) {
     $valuestring = "'".implode("', '", $valuearr)."'";
 
     $insertquery = "INSERT INTO `".$dbname."`(".$keysstring.") VALUES (".$valuestring.")";
+
 
     $mysql -> query($insertquery);
 
