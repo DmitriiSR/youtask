@@ -1,9 +1,6 @@
 <?php require_once "components/header.php"?>
 <script src="js/main.js"></script>
 <script>
-    if (!window.mainObj) {
-        window.mainObj = [];
-    }
     window.onload = function() {
         mainObj.push(getRows('tasks'));
     }

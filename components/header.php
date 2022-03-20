@@ -29,6 +29,6 @@ if (!$_COOKIE['auth_user']) {
         viewModel = {};
     }
     if (!window.mainObj) {
-        window.mainObj = [];
+        window.mainObj = {};
     }
 </script>
