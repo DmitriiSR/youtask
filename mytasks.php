@@ -18,12 +18,20 @@ setcookie("auth", $auth, time() - 2592000);
         <div class="tasks__inner">
             <header class="tasks__header" style="display: flex; justify-content: space-between;">
                 <span>Задачи</span>
-                <div style="position: relative;">
-                    <span id="tasksFilterBtn" data-bind="click: function () {viewModel.popupVisible(!viewModel.popupVisible())}" style="margin-left: auto; cursor: pointer;">Все задачи</span>
-                    <div id="taskFilterPopup" data-bind="visible: viewModel.popupVisible" style="width: max-content; position: absolute; top: 120%; right: 0; padding: 20px 30px; background: #ffffff; border-radius: 17px;  box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25);">
-                        <a href="" style="display: block; padding-bottom: 20px;">Все задачи</a>
-                        <a href="" style="display: block; padding-bottom: 20px;">Выполненные задачи</a>
-                        <a href="" style="display: block;">Просроченные задачи</a>
+                <div class="tasks__filter-btn">
+                    <span id="tasksFilterBtn" data-bind="click: function () {viewModel.popupVisible(!viewModel.popupVisible())}" style="display: flex">Все задачи<svg class="icon" style="margin-left: 13px;" aria-hidden="true" focusable="false">
+                                <use href="images/sprite.svg#arrow-down"></use>
+                            </svg></span>
+                    <div id="taskFilterPopup" data-bind="visible: viewModel.popupVisible" class="tasks__filter">
+                        <a href="" style="display: flex; align-items: center; padding-bottom: 20px;"><svg class="icon" style="margin-right: 11px;" aria-hidden="true" focusable="false">
+                                <use href="images/sprite.svg#icon-note-blue"></use>
+                            </svg>Все задачи</a>
+                        <a href="" style="display: flex; align-items: center; padding-bottom: 20px;"><svg class="icon" style="margin-right: 11px;" aria-hidden="true" focusable="false">
+                                <use href="images/sprite.svg#icon-done-green"></use>
+                            </svg>Выполненные задачи</a>
+                        <a href="" style="display: flex; align-items: center;;"><svg class="icon" style="margin-right: 11px;" aria-hidden="true" focusable="false">
+                                <use href="images/sprite.svg#icon-timer-red"></use>
+                            </svg>Просроченные задачи</a>
                     </div>
                 </div>
             </header>
@@ -37,19 +45,18 @@ setcookie("auth", $auth, time() - 2592000);
                         <use href="images/sprite.svg#icon-add"></use>
                     </svg>Добавить задачу</button>
                     </div>
-                    <div class="addtask" data-bind="visible: viewModel.addTaskVisible">
-                
+                    <div class="addtask" data-bind="visible: viewModel.addTaskVisible">                
                     <label style="margin-bottom: 20px">
                         <input id="inputText" data-bind="value: viewModel.taskTitle;" type="text" placeholder="Название задачи">
                     </label>
                     <label>
-                        <input id="inputDate" data-bind="value: viewModel.taskDate;" type="date" placeholder="Закончить к">
+                        <input id="inputDate" data-bind="value: viewModel.taskDate;" type="date" placeholder="Закончить к" style="width: 235px">
                     </label>
-                    <div>
-                        <button data-bind="click: function () {viewModel.addTaskVisible(false)};" style="padding: 10px; background: transparent; margin-top:15px;">Отменить</button>
+                    <div class="buttons__block">
+                        <button data-bind="click: function () {viewModel.addTaskVisible(false)};" style="margin-top:15px;" class="btn">Отменить</button>
                         <button data-bind="click: function() {
                                         viewModel.addTask();
-                        }" style="padding: 10px; background: transparent; margin-top:15px;">Добавить</button>
+                        }" style="margin-top:15px;" class="btn">Добавить</button>
                     </div>
                 </div>
             </div>
