@@ -16,6 +16,7 @@ if (!$_COOKIE['auth_user']) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
     <title>You task</title>
 </head>
 <body>
@@ -26,5 +27,8 @@ if (!$_COOKIE['auth_user']) {
     if ('viewModel' in window) {
     } else {
         viewModel = {};
+    }
+    if (!window.mainObj) {
+        window.mainObj = [];
     }
 </script>

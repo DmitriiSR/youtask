@@ -4,6 +4,12 @@ $auth = true;
 setcookie("auth", $auth, time() - 2592000);
 ?>
 <body>
+    <script>
+        window.onload = function() {
+            getObj('tasks');
+        }
+    </script>
+
 <div class="mytasks__wrapper">
 <header class="header">
         <a href="">Мои задачи</a>
