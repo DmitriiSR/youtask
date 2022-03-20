@@ -1,9 +1,14 @@
 
+function setDbInViewModel () {
+
+    for (let i = 0; i < arguments.length; i++) {
+        viewModel[arguments[i]] = ko.observableArray([]);
+    }
+}
 
 function getDB () {
     let argObj = arguments;
-    for (let i = 0; i < arguments.length; i++) {
-
+    for (let i = 0; i < argObj.length; i++) {
         $.ajax({
             type: "POST",
             url: '/engine/read.php',
@@ -11,10 +16,11 @@ function getDB () {
             success: function(response)
             {
                 var jsonData = JSON.parse(response);
-                mainObj[argObj[i]] = jsonData;
+                viewModel[argObj[i]](Array.from(jsonData));
             }
         });
     }
+
 }
 
 function getObj(data) {
@@ -24,7 +30,7 @@ function getObj(data) {
         data: data,
         success: function (response) {
             var jsonData = JSON.parse(response)[0];
-            window.mainObj.push(jsonData);
+            console.log(jsonData);
         }
     });
 }
@@ -43,15 +49,6 @@ let setObj = function (data) {
     });
 }
 
-// let date = new Date();
-// let day = date.getDay();
-// let dayNumber = date.getDate();
-// let month = date.getMonth();
-// let year = date.getFullYear();
-// let months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
-// let days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
-// console.log(dayNumber);
-//
-// document.getElementById('date').innerHTML = dayNumber + ' ' + months[month] + ' ' + year + ',' + ' ' + days[day];
+
 
 
