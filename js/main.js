@@ -1,19 +1,21 @@
 
 
-function getRows(data) {
-    $.ajax({
-        type: "POST",
-        url: '/engine/read.php',
-        data: data,
-        success: function(response)
-        {
-            var jsonData = JSON.parse(response);
-            mainObj.push(jsonData);
-        }
-    });
+function getDB () {
+    let argObj = arguments;
+    for (let i = 0; i < arguments.length; i++) {
+
+        $.ajax({
+            type: "POST",
+            url: '/engine/read.php',
+            data: argObj[i],
+            success: function(response)
+            {
+                var jsonData = JSON.parse(response);
+                mainObj[argObj[i]] = jsonData;
+            }
+        });
+    }
 }
-
-
 
 function getObj(data) {
     $.ajax({

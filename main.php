@@ -1,8 +1,13 @@
 <?php require_once "components/header.php"?>
 <script src="js/main.js"></script>
 <script>
+    // function getDB() {
+    //     for (let i = 0; i < arguments.length; i++) {
+    //         mainObj[arguments[i]] = getRows(arguments[i], );
+    //     }
+    // }
     window.onload = function() {
-        mainObj.push(getRows('tasks'));
+        getDB('tasks', 'users');
     }
 </script>
 
