@@ -4,14 +4,8 @@
 
 .my-container {
     padding-left: 0;
+    padding-right: 0;
     font-family: "Montserrat", sans-serif;
-}
-
-.menu__navigation {
-    margin-left: -33px;
-}
-
-.projects {
     background-color: #dbf0ff;
 }
 
@@ -21,7 +15,12 @@
 
 .projects__card {
     background-color: #ffffff;
-    box-shadow: 5px 5px 25px rgb(43 144 218 / 25%);
-    border-radius: 21px;
-    height: 350px;
+}
+
+.active-user {
+    color: #53B6FD;
+}
+
+a:hover {
+    color: #53B6FD;
 }
