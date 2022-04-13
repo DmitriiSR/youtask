@@ -1,5 +1,5 @@
 <div class="sidebar col-2 position-fixed">
-        <div class="d-flex flex-column p-3 bg-white shadow" style="height: 100vh">
+        <div class="d-flex flex-column p-3 bg-white shadow" style="height: 100vh; min-width: 70px;">
                 <div class="menu-logo">
                     <a href="home.php" class="d-flex align-items-center flex-shrink-0">      
                         <svg class="icon d-none d-lg-block" style="width: 174px; height: 57px;" aria-hidden="true" focusable="false">

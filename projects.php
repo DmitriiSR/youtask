@@ -19,9 +19,9 @@ setcookie("auth", $auth, time() - 2592000);
             </div>
         </div>
 
-        <div class="row mt-5">
+        <div class="row mt-5 d-flex justify-content-center">
             
-                <div class="col-md-4 col-sm-12">
+                <div class="col-xxl-3 col-md-4 col-sm-12">
                     <div class="projects__card p-3 mb-4 shadow rounded-3">
                         <img src="images/home/overdue-tasks-background.png" alt="" class="img-fluid">
                         <div class="projects__card-body mt-3">
@@ -30,7 +30,7 @@ setcookie("auth", $auth, time() - 2592000);
                     </div>
                 </div>
 
-                <div class="col-md-4 col-sm-12">
+                <div class="col-xxl-3 col-md-4 col-sm-12">
                     <div class="projects__card p-3 mb-4 shadow rounded-3">
                         <img src="images/home/overdue-tasks-background.png" alt="" class="img-fluid">
                         <div class="projects__card-body mt-3">
@@ -39,7 +39,7 @@ setcookie("auth", $auth, time() - 2592000);
                     </div>
                 </div>
 
-                <div class="col-md-4 col-sm-12">
+                <div class="col-xxl-3 col-md-4 col-sm-12">
                     <div class="projects__card p-3 mb-4 shadow rounded-3">
                         <img src="images/home/overdue-tasks-background.png" alt="" class="img-fluid">
                         <div class="projects__card-body mt-3">

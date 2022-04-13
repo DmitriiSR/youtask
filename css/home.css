@@ -136,3 +136,9 @@
 .chat__inner a {
     margin-right: 30px;
 }
+
+.home {
+    background-image: url(../images/home/home-background.png);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+}
