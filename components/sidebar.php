@@ -21,7 +21,7 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="projects.php">
                     <svg class="icon" aria-hidden="true" focusable="false">
                         <use href="images/sprite.svg#icon-projects"></use>
                     </svg>

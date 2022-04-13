@@ -1,5 +1,5 @@
 .menu {
-    min-width: 305px;
+    width: 305px;
     height: 100vh;
     padding: 35px 0px 38px 0px;
     display: flex;

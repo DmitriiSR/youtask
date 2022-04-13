@@ -1,0 +1,27 @@
+.bootstrap-header {
+    color: #53b6fd;
+}
+
+.my-container {
+    padding-left: 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+.menu__navigation {
+    margin-left: -33px;
+}
+
+.projects {
+    background-color: #dbf0ff;
+}
+
+.menu-item {
+    color: #53B6FD;
+}
+
+.projects__card {
+    background-color: #ffffff;
+    box-shadow: 5px 5px 25px rgb(43 144 218 / 25%);
+    border-radius: 21px;
+    height: 350px;
+}
