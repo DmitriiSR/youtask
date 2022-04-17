@@ -26,8 +26,8 @@ function getDB () {
     for (let i = 0; i < argObj.length; i++) {
         $.ajax({
             type: "POST",
-            url: '/engine/read.php',
-            data: argObj[i],
+            url: '/engine/requests.php',
+            data: {data: argObj[i], action: 'read'},
             success: function(response)
             {
                 var jsonData = JSON.parse(response);
@@ -64,8 +64,8 @@ function set(obj) {
 function getObj(data) {
     $.ajax({
         type: "GET",
-        url: '/engine/getobj.php',
-        data: data,
+        url: '/engine/requests.php',
+        data: {data: data, action: 'getobj'},
         success: function (response) {
             var jsonData = JSON.parse(response)[0];
         }
@@ -75,8 +75,8 @@ function getObj(data) {
 let setObj = function (data) {
     $.ajax({
         type: "POST",
-        url: '/engine/write.php',
-        data: data,
+        url: '/engine/requests.php',
+        data: {data: data, action: 'write'},
         success: function(response)
         {
             var jsonData = JSON.parse(response);
