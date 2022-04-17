@@ -103,3 +103,24 @@ if ($_REQUEST['action'] === 'write') {
         echo json_encode(array('success' => 0));
     }
 }
+
+// Удаление записи из базы
+if ($_REQUEST['action'] === 'delete') {
+    if ($_REQUEST['data']) {
+        $mysql = new mysqli("youtask", "mysql", "", "youtask");
+        $mysql->query("SET NAMES 'utf8'");
+
+        if ($mysql->connect_error) {
+            echo json_encode(array('success' => 0, 'Error Number: ' => $mysql->connect_errno, 'Error: ' => $mysql->connect_error));
+        }
+
+        $dbname = $_REQUEST['data']['dbname'];
+        $id =   $_REQUEST['data']['id'];
+
+        $deletequery = "DELETE FROM `".$dbname."` WHERE id=".$id;
+
+        $mysql->query($deletequery);
+
+        echo json_encode($deletequery);
+    }
+}

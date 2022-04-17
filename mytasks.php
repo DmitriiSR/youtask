@@ -70,6 +70,7 @@ setcookie("auth", $auth, time() - 2592000);
                             <h2 data-bind="text: tasktext" style="font-weight: 400; font-size: 16px; line-height: 20px; color: #000000;"></h2>
                         </div>
                         <span data-bind="text: taskdate"></span>
+                        <button data-bind="click: function () {remove('tasks', id)}" class="btn btn-danger">Удалить</button>
                     </div>
                 </div>
             <!-- /ko -->

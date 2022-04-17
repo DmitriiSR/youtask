@@ -84,6 +84,21 @@ let setObj = function (data) {
     });
 }
 
+function remove(db, id) {
+    arr = viewModel[db]()
+    data = {dbname: db, id: id};
+    index = viewModel[db]().findIndex(i => i.id === id);
+    viewModel[db].splice(index, 1);
+    $.ajax({
+        type: "POST",
+        url: '/engine/requests.php',
+        data: {data: data, action: 'delete'},
+        success: function(response)
+        {
+            var jsonData = JSON.parse(response);
+        }
+    });
+}
 
 
 
