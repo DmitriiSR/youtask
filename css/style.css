@@ -37,9 +37,7 @@ body {
 
 .btn {
     display: inline-block;
-    width: 156px;
     height: 44px;
-    background-color: #53b6fd;
     border-radius: 7px;
     font-weight: 500;
     font-size: 16px;

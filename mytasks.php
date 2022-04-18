@@ -5,6 +5,12 @@ setcookie("auth", $auth, time() - 2592000);
 ?>
 <body>
 
+<script>
+    setDbInViewModel('tasks');
+    getDB('tasks');
+    newObj('tasks');
+</script>
+
 
 
 
@@ -87,7 +93,6 @@ setcookie("auth", $auth, time() - 2592000);
     </main>
 
     <script>
-        newObj('tasks');
             viewModel.popupVisible = ko.observable(false);
             viewModel.addTaskVisible = ko.observable(false);
             viewModel.taskEditPopup = ko.observable(false);
