@@ -11,8 +11,6 @@ if ('viewModel' in window) {
 }
 
 
-setDbInViewModel('tasks', 'users');
-getDB('tasks', 'users');
 const storage = new Map();
 
 function setDbInViewModel() {
