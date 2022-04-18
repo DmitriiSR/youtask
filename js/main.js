@@ -11,25 +11,24 @@ if ('viewModel' in window) {
 }
 
 
-setDbInViewModel('tasks');
-getDB('tasks');
+setDbInViewModel('tasks', 'users');
+getDB('tasks', 'users');
 const storage = new Map();
 
-function setDbInViewModel () {
+function setDbInViewModel() {
     for (let i = 0; i < arguments.length; i++) {
         viewModel[arguments[i]] = ko.observableArray([]);
     }
 }
 
-function getDB () {
+function getDB() {
     let argObj = arguments;
     for (let i = 0; i < argObj.length; i++) {
         $.ajax({
             type: "POST",
             url: '/engine/requests.php',
-            data: {data: argObj[i], action: 'read'},
-            success: function(response)
-            {
+            data: { data: argObj[i], action: 'read' },
+            success: function (response) {
                 var jsonData = JSON.parse(response);
                 viewModel[argObj[i]](Array.from(jsonData));
             }
@@ -53,7 +52,7 @@ function set(obj) {
     let row = {};
     for (let key in obj) {
         row[key] = obj[key]
-        if(typeof row[key] === "function") {
+        if (typeof row[key] === "function") {
             row[key] = row[key]();
         }
     }
@@ -65,7 +64,7 @@ function getObj(data) {
     $.ajax({
         type: "GET",
         url: '/engine/requests.php',
-        data: {data: data, action: 'getobj'},
+        data: { data: data, action: 'getobj' },
         success: function (response) {
             var jsonData = JSON.parse(response)[0];
         }
@@ -76,9 +75,8 @@ let setObj = function (data) {
     $.ajax({
         type: "POST",
         url: '/engine/requests.php',
-        data: {data: data, action: 'write'},
-        success: function(response)
-        {
+        data: { data: data, action: 'write' },
+        success: function (response) {
             var jsonData = JSON.parse(response);
         }
     });
@@ -86,15 +84,14 @@ let setObj = function (data) {
 
 function remove(db, id) {
     arr = viewModel[db]()
-    data = {dbname: db, id: id};
+    data = { dbname: db, id: id };
     index = viewModel[db]().findIndex(i => i.id === id);
     viewModel[db].splice(index, 1);
     $.ajax({
         type: "POST",
         url: '/engine/requests.php',
-        data: {data: data, action: 'delete'},
-        success: function(response)
-        {
+        data: { data: data, action: 'delete' },
+        success: function (response) {
             var jsonData = JSON.parse(response);
         }
     });

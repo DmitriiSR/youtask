@@ -6,6 +6,9 @@ setcookie("auth", $auth, time() - 2592000);
 <body>
 
 
+
+
+
 <div class="mytasks__wrapper">
 <header class="header">
         <a href="">Мои задачи</a>
@@ -56,23 +59,26 @@ setcookie("auth", $auth, time() - 2592000);
                         <button data-bind="click: function () {viewModel.addTaskVisible(false)};" style="margin-top:15px;" class="btn">Отменить</button>
                         <button data-bind="click: function() {
                                         set(storage.get('tasks'));
+                                        viewModel.addTaskVisible(false);
                         }" style="margin-top:15px;" class="btn">Добавить</button>
                     </div>
                 </div>
             </div>
             <!-- ko foreach: viewModel.tasks() -->
-                <div class="" style="margin-top: 30px; position: relative;">
-                    <div class="task">
-                        <div style="display: flex; align-items: center;">
-                            <svg class="icon" style="margin-right: 13px;" aria-hidden="true" focusable="false">
-                                <use href="images/sprite.svg#icon-dobe-black"></use>
-                            </svg>
-                            <h2 data-bind="text: tasktext" style="font-weight: 400; font-size: 16px; line-height: 20px; color: #000000;"></h2>
+                <!-- ko if: Number(userid) === Number(cookieObj.userid) -->
+                    <div class="" style="margin-top: 30px; position: relative;">
+                        <div class="task">
+                            <div style="display: flex; align-items: center;">
+                                <svg class="icon" style="margin-right: 13px;" aria-hidden="true" focusable="false">
+                                    <use href="images/sprite.svg#icon-dobe-black"></use>
+                                </svg>
+                                <h2 data-bind="text: tasktext" style="font-weight: 400; font-size: 16px; line-height: 20px; color: #000000;"></h2>
+                            </div>
+                            <span data-bind="text: taskdate"></span>
+                            <button data-bind="click: function () {remove('tasks', id)}" class="btn btn-danger">Удалить</button>
                         </div>
-                        <span data-bind="text: taskdate"></span>
-                        <button data-bind="click: function () {remove('tasks', id)}" class="btn btn-danger">Удалить</button>
                     </div>
-                </div>
+                 <!-- /ko -->
             <!-- /ko -->
 
         </div>
@@ -81,7 +87,7 @@ setcookie("auth", $auth, time() - 2592000);
     </main>
 
     <script>
-        viewModel.taskObj = ko.observable(newObj('tasks'))
+        newObj('tasks');
             viewModel.popupVisible = ko.observable(false);
             viewModel.addTaskVisible = ko.observable(false);
             viewModel.taskEditPopup = ko.observable(false);
