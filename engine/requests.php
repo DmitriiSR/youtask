@@ -99,7 +99,7 @@ if ($_REQUEST['action'] === 'write') {
 
         $mysql->query($insertquery);
 
-        echo json_encode(array('success' => 0));
+        echo json_encode($insertquery);
     }
 }
 
