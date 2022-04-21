@@ -31,13 +31,13 @@ setcookie("auth", $auth, time() - 2592000);
                                 <use href="images/sprite.svg#arrow-down"></use>
                             </svg></span>
                     <div id="taskFilterPopup" data-bind="visible: viewModel.popupVisible" class="tasks__filter">
-                        <a href="" style="display: flex; align-items: center; padding-bottom: 20px;"><svg class="icon" style="margin-right: 11px;" aria-hidden="true" focusable="false">
+                        <a data-bind="click: function () {viewModel.filter('all'); viewModel.popupVisible(false);}" href="" style="display: flex; align-items: center; padding-bottom: 20px;"><svg class="icon" style="margin-right: 11px;" aria-hidden="true" focusable="false">
                                 <use href="images/sprite.svg#icon-note-blue"></use>
                             </svg>Все задачи</a>
-                        <a href="" style="display: flex; align-items: center; padding-bottom: 20px;"><svg class="icon" style="margin-right: 11px;" aria-hidden="true" focusable="false">
+                        <a data-bind="click: function () {viewModel.filter('done'); viewModel.popupVisible(false);}" href="" style="display: flex; align-items: center; padding-bottom: 20px;"><svg class="icon" style="margin-right: 11px;" aria-hidden="true" focusable="false">
                                 <use href="images/sprite.svg#icon-done-green"></use>
                             </svg>Выполненные задачи</a>
-                        <a href="" style="display: flex; align-items: center;;"><svg class="icon" style="margin-right: 11px;" aria-hidden="true" focusable="false">
+                        <a data-bind="click: function () {viewModel.filter('overdue'); viewModel.popupVisible(false);}" href="" style="display: flex; align-items: center;;"><svg class="icon" style="margin-right: 11px;" aria-hidden="true" focusable="false">
                                 <use href="images/sprite.svg#icon-timer-red"></use>
                             </svg>Просроченные задачи</a>
                     </div>
@@ -53,25 +53,78 @@ setcookie("auth", $auth, time() - 2592000);
                     </div>
                 </div>
             </div>
-            <!-- ko foreach: viewModel.tasks() -->
-                <!-- ko if: Number(userid) === Number(cookieObj.userid) -->
-                    <div class="" style="margin-top: 30px; position: relative;">
-                        <div class="task">
-                            <div style="display: flex; align-items: center;">
-                                <svg class="icon" style="margin-right: 13px;" aria-hidden="true" focusable="false">
-                                    <use href="images/sprite.svg#icon-dobe-black"></use>
-                                </svg>
-                                <h2 data-bind="text: tasktext" style="font-weight: 400; font-size: 16px; line-height: 20px; color: #000000;"></h2>
-                            </div>
-                            <span data-bind="text: taskdate"></span>
-                            <div class="">
-                                <button data-bind="click: function () {remove('tasks', id)}" class="btn btn-danger">Удалить</button>
-                                <button data-bind="click: function () {editOneField('tasks', id, {status: 'closed'});}" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tasksModal">Выполнено</button>
-                            </div>
+
+            <!-- ko if: viewModel.filter() === 'all' -->
+                <!-- ko foreach: viewModel.tasks() -->
+                <!-- ko if: Number(userid) === Number(cookieObj.userid) && status === 'open'-->
+                <div class="" style="margin-top: 30px; position: relative;">
+                    <div class="task">
+                        <div style="display: flex; align-items: center;">
+                            <svg class="icon" style="margin-right: 13px;" aria-hidden="true" focusable="false">
+                                <use href="images/sprite.svg#icon-dobe-black"></use>
+                            </svg>
+                            <h2 data-bind="text: tasktext" style="font-weight: 400; font-size: 16px; line-height: 20px; color: #000000;"></h2>
+                        </div>
+                        <span data-bind="text: taskdate"></span>
+                        <div class="">
+                            <button data-bind="click: function () {remove('tasks', id)}" class="btn btn-danger">Удалить</button>
+                            <button data-bind="click: function () {editOneField('tasks', id, {status: 'closed'});}" class="btn btn-success">Выполнено</button>
                         </div>
                     </div>
-                 <!-- /ko -->
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
             <!-- /ko -->
+
+
+        <!-- ko if: viewModel.filter() === 'done' -->
+            <!-- ko foreach: viewModel.tasks() -->
+            <!-- ko if: Number(userid) === Number(cookieObj.userid) && status === 'closed' -->
+            <div class="" style="margin-top: 30px; position: relative;">
+                <div class="task">
+                    <div style="display: flex; align-items: center;">
+                        <svg class="icon" style="margin-right: 13px;" aria-hidden="true" focusable="false">
+                            <use href="images/sprite.svg#icon-dobe-black"></use>
+                        </svg>
+                        <h2 data-bind="text: tasktext" style="font-weight: 400; font-size: 16px; line-height: 20px; color: #000000;"></h2>
+                    </div>
+                    <span data-bind="text: taskdate"></span>
+                    <div class="">
+                        <button data-bind="click: function () {remove('tasks', id)}" class="btn btn-danger">Удалить</button>
+                        <button data-bind="click: function () {editOneField('tasks', id, {status: 'open'});}" class="btn btn-success">Вернуть</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+        <!-- /ko -->
+
+
+        <!-- ko if: viewModel.filter() === 'overdue' -->
+            <!-- ko foreach: viewModel.tasks() -->
+            <!-- ko if: Number(userid) === Number(cookieObj.userid) && ( Number(DateTime.now().toFormat('L')) > Number(DateTime.fromISO(taskdate).toFormat('L')) ||
+            Number(DateTime.now().toFormat('yyyy')) > Number(DateTime.fromISO(taskdate).toFormat('yyyy'))  ||
+            Number(DateTime.now().toFormat('d')) > Number(DateTime.fromISO(taskdate).toFormat('d')) )-->
+            <div class="" style="margin-top: 30px; position: relative;">
+                <div class="task">
+                    <div style="display: flex; align-items: center;">
+                        <svg class="icon" style="margin-right: 13px;" aria-hidden="true" focusable="false">
+                            <use href="images/sprite.svg#icon-dobe-black"></use>
+                        </svg>
+                        <h2 data-bind="text: tasktext" style="font-weight: 400; font-size: 16px; line-height: 20px; color: #000000;"></h2>
+                    </div>
+                    <span data-bind="text: taskdate"></span>
+                    <div class="">
+                        <button data-bind="click: function () {remove('tasks', id)}" class="btn btn-danger">Удалить</button>
+                        <button data-bind="click: function () {editOneField('tasks', id, {status: 'closed'});}" class="btn btn-success">Выполнено</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+        <!-- /ko -->
+
+
 
         </div>
 
@@ -103,6 +156,7 @@ setcookie("auth", $auth, time() - 2592000);
 </div>
 
     <script>
+        viewModel.filter = ko.observable('all');
             viewModel.linkIndicator = 'myTasks';
             viewModel.popupVisible = ko.observable(false);
             viewModel.addTaskVisible = ko.observable(false);
