@@ -52,7 +52,6 @@ if ($_REQUEST['action'] === 'getobj') {
 
         $table = $mysql->query($selectquery);
 
-        $finalarr = array();
 
         while ($row = $table->fetch_assoc()) {
 
@@ -121,6 +120,50 @@ if ($_REQUEST['action'] === 'delete') {
 
         $mysql->query($deletequery);
 
-        echo json_encode($deletequery);
+        echo json_encode(array('success' => 0));
+    }
+}
+
+// Получение записи из базы по id
+if ($_REQUEST['action'] === 'getnote') {
+    if ($_REQUEST['data']) {
+        $mysql = new mysqli("youtask", "mysql", "", "youtask");
+        $mysql->query("SET NAMES 'utf8'");
+
+        if ($mysql->connect_error) {
+            echo json_encode(array('success' => 0, 'Error Number: ' => $mysql->connect_errno, 'Error: ' => $mysql->connect_error));
+        }
+
+        $dbname = strval($_REQUEST['data']['dbname']);
+        $id =   $_REQUEST['data']['id'];
+
+        $sqlquery = "SELECT * FROM `".$dbname."` WHERE id=".$id;
+
+        $table = $mysql->query($sqlquery);
+        echo json_encode($table->fetch_assoc());
+
+    }
+}
+
+    // Изменение одного поля в записи
+if ($_REQUEST['action'] === 'getonenote') {
+    if ($_REQUEST['data']) {
+        $mysql = new mysqli("youtask", "mysql", "", "youtask");
+        $mysql->query("SET NAMES 'utf8'");
+
+        if ($mysql->connect_error) {
+            echo json_encode(array('success' => 0, 'Error Number: ' => $mysql->connect_errno, 'Error: ' => $mysql->connect_error));
+        }
+
+        $dbname = strval($_REQUEST['data']['dbname']);
+        $id = $_REQUEST['data']['id'];
+        $key = $_REQUEST['data']['key'][0];
+        $value = $_REQUEST['data']['value'][0];
+
+        $sqlquery = "UPDATE `".$dbname."` SET `".$key."` = '".$value."' WHERE id=".$id;
+
+        $mysql->query($sqlquery);
+        echo json_encode($sqlquery);
+
     }
 }

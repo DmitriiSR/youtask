@@ -28,7 +28,7 @@ setcookie("auth", $auth, time() - 2592000);
         <div class="row mt-5 d-flex justify-content-center">
             <div class="overdue p-3 shadow rounded-3 bg-white d-flex flex-column h-100">
                 <h2 class="text-start">Проекты</h2>
-                <button data-bind="click: function () {newObj('projects')}" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#addProject" type="button">Создать проект</button>
+                <button data-bind="click: function () {newObj('projects')}" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#addProject" type="button" style="width: fit-content;">Создать проект</button>
                 <!-- ko foreach: viewModel.projects -->
                      <!-- ko if: Number(userid) === Number(cookieObj.userid) -->
                         <div data-bind="click: function () {location.href = '/project-page.php/' + id}" class="bg-light p-3 rounded-3 mb-4" style="cursor: pointer;">
@@ -69,5 +69,7 @@ setcookie("auth", $auth, time() - 2592000);
     </div>
   </div>
 </div>
-
+<script>
+    viewModel.linkIndicator = 'projects';
+</script>
 <?php require_once "components/footer.php"?>

@@ -12,9 +12,9 @@
                     </a>
                 </div>
 
-                <ul class="nav flex-column mb-auto mt-5 menu-list">
+                <ul class="nav nav-pills flex-column mb-auto mt-5 menu-list">
                     <li class="nav-item mb-2">
-                        <a href="home.php" class="nav-link d-flex align-items-center menu-item" aria-current="page">                
+                        <a data-bind="css: {'active': (viewModel.linkIndicator === 'home')}" href="home.php" class="nav-link d-flex align-items-center menu-item" aria-current="page">
                         <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-house me-3 flex-shrink-0" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
                         <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
@@ -23,7 +23,7 @@
                         </a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="mytasks.php" class="nav-link d-flex menu-item" aria-current="page">                
+                        <a data-bind="css: {'active': (viewModel.linkIndicator === 'myTasks')}" href="mytasks.php" class="nav-link d-flex menu-item" aria-current="page">
                         <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-file-earmark-plus me-3 flex-shrink-0" viewBox="0 0 16 16">
                         <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z"/>
                         <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="projects.php" class="nav-link d-flex menu-item" aria-current="page">                
+                        <a data-bind="css: {'active': (viewModel.linkIndicator === 'projects')}" href="projects.php" class="nav-link d-flex menu-item" aria-current="page">
                         <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-briefcase me-3 flex-shrink-0" viewBox="0 0 16 16">
                         <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5zm1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0zM1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5z"/>
                         </svg>

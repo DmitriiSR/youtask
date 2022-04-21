@@ -1,3 +1,5 @@
+var DateTime = luxon.DateTime;
+
 let cookieObj = {};
 let cookies = document.cookie.split('; ');
 for (let i = 0; i < cookies.length; i++) {
@@ -95,5 +97,26 @@ function remove(db, id) {
     });
 }
 
+function clearForm() {
+    let inputParentArr = document.querySelectorAll(".inputs-to-clear");
 
+    inputParentArr.forEach((item) => {
+        let inputArr = item.querySelectorAll("input");
+        inputArr.forEach((item) => {
+            item.value = "";
+        })
+    })
+}
 
+function editOneField(db, id, obj) {
+    data = { dbname: db, id: id, key: Object.keys(obj), value: Object.values(obj) };
+    index = viewModel[db]().findIndex(i => i.id === id);
+    $.ajax({
+        type: "POST",
+        url: '/engine/requests.php',
+        data: { data: data, action: 'getonenote' },
+        success: function (response) {
+            var jsonData = JSON.parse(response);
+        }
+    });
+}
