@@ -2,6 +2,7 @@
 @import "home.css";
 @import "mytasks.css";
 @import "projects.css";
+@import "bootstrap-datepicker3.min.css";
 
 :root {
     --color1: #53B6FD;

@@ -120,3 +120,9 @@ function editOneField(db, id, obj) {
         }
     });
 }
+
+function getIdFromUrl() {
+    let urlArr = window.location.href.split('/');
+    let gettedId = urlArr.pop();
+    return +gettedId;
+}

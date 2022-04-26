@@ -27,3 +27,5 @@ if (!$_COOKIE['auth_user']) {
 <script src="js/luxon.js"></script>
 <script src="js/main.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-datepicker.min.js"></script>
+<script src="js/bootstrap-datepicker.ru.min.js"></script>

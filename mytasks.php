@@ -21,7 +21,7 @@ setcookie("auth", $auth, time() - 2592000);
                 <?php require_once "components/header-row.php"?>
 
                 <div class="col-xxl-8 col-lg-12 overflow-auto">
-                    <div class="mytasks__inner card mt-5 p-3 shadow rounded-3 bg-white d-flex flex-column" style="max-height: 606px;">
+                    <div class="mytasks__inner card mt-5 p-3 shadow rounded-3 bg-white d-flex flex-column" style="min-height: 606px;">
                         <img src="images/mytasks/mytasks-block-background.png" alt="" class="card-img-top">
                         <div class="mytasks__inner-header d-flex justify-content-between mt-3 fs-5" style="color: var(--color1);">
                             <div><p>Задачи</p></div>
