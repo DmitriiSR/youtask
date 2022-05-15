@@ -2,6 +2,7 @@
 <?php
 $auth = true;
 setcookie("auth", $auth, time() - 2592000);
+
 ?>
 <script>
     setDbInViewModel('tasks', 'projects');
@@ -10,13 +11,13 @@ setcookie("auth", $auth, time() - 2592000);
 </script>
 <div class="home">
     <div class="container-fluid my-container" style="height: 100vh;">
-        
+
         <?php require_once "components/sidebar-bs.php"?>
 
         <div class="col-10 ms-auto p-5">
             <div class="row">
             <?php require_once "components/header-row.php"?>
-                
+
                 <div class="row mt-5 d-flex justify-content-center">
                     <div class="col-xxl-4 col-lg-6 col-sm-12 mb-5" style="height: 606px">
                         <div class="overdue p-3 shadow rounded-3 bg-white d-flex flex-column h-100" style="min-width: 250px;">

@@ -25,7 +25,7 @@ setcookie("auth", $auth, time() - 2592000);
                         <img src="images/mytasks/mytasks-block-background.png" alt="" class="card-img-top">
                         <div class="mytasks__inner-header d-flex justify-content-between mt-3 fs-5" style="color: var(--color1);">
                             <div><p>Задачи</p></div>
-                            
+
                             <div class="text-end">
                                 <p id="tasksFilterBtn" data-bind="click: function () {viewModel.popupVisible(!viewModel.popupVisible())}" style="cursor: pointer;">
                                     <!-- ko if: viewModel.filter() === 'all' -->
@@ -62,7 +62,7 @@ setcookie("auth", $auth, time() - 2592000);
                                         <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
                                         </svg>Просроченные задачи</a>
                                     </div>
-                                </div>                                
+                                </div>
                         </div>
                         <div class="">
                             <a href="" data-bind="click: function () {clearForm(); newObj('tasks');}" data-bs-toggle="modal" data-bs-target="#addTask" type="button" id="addTaskButton" style="color: var(--color1);"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-plus-circle me-3" viewBox="0 0 16 16">
@@ -71,7 +71,7 @@ setcookie("auth", $auth, time() - 2592000);
                             </svg>Добавить задачу</a>
                         </div>
                         <div class="mytasks__inner-body overflow-scroll">
-                            
+
 
                             <!-- ko if: viewModel.filter() === 'all' -->
                                 <!-- ko foreach: viewModel.tasks() -->
@@ -86,7 +86,7 @@ setcookie("auth", $auth, time() - 2592000);
                                                     </svg>
                                                     <h5 data-bind="text: tasktitle"></h5>
                                                 </div>
-                                                
+
                                                 <div class="d-flex flex-column align-items-center">
                                                     <span class="text-secondary">Выполнить до:</span>
                                                     <span data-bind="text: taskdate"></span>
@@ -95,7 +95,7 @@ setcookie("auth", $auth, time() - 2592000);
                                                 <div class="overflow-auto">
                                                     <span data-bind="text: tasktext"></span>
                                                 </div>
-                                                
+
                                                 <div class="d-flex mt-3">
                                                     <button data-bind="click: function () {remove('tasks', id)}" class="btn btn-danger me-2">Удалить</button>
                                                     <button data-bind="click: function () {editOneField('tasks', id, {status: 'closed'});}" class="btn btn-success">Выполнено</button>
@@ -129,7 +129,7 @@ setcookie("auth", $auth, time() - 2592000);
                                                     <div class="overflow-auto">
                                                         <span data-bind="text: tasktext"></span>
                                                     </div>
-                                                    
+
                                                     <div class="d-flex mt-3">
                                                         <button data-bind="click: function () {remove('tasks', id)}" class="btn btn-danger me-2">Удалить</button>
                                                         <button data-bind="click: function () {editOneField('tasks', id, {status: 'open'});}" class="btn btn-success">Вернуть</button>
@@ -166,7 +166,7 @@ setcookie("auth", $auth, time() - 2592000);
                                                         <div class="overflow-auto">
                                                             <span data-bind="text: tasktext"></span>
                                                         </div>
-                                                        
+
                                                         <div class="d-flex mt-3">
                                                             <button data-bind="click: function () {remove('tasks', id)}" class="btn btn-danger me-2">Удалить</button>
                                                             <button data-bind="click: function () {editOneField('tasks', id, {status: 'closed'});}" class="btn btn-success">Выполнено</button>
@@ -238,7 +238,7 @@ setcookie("auth", $auth, time() - 2592000);
             });
 
 
-    
+
 </script>
 
 

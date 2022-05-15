@@ -13,6 +13,8 @@ if ('viewModel' in window) {
 }
 
 
+
+
 const storage = new Map();
 
 function setDbInViewModel() {
@@ -60,16 +62,33 @@ function set(obj) {
     setObj(row);
 }
 
-function getObj(data) {
-    $.ajax({
-        type: "GET",
-        url: '/engine/requests.php',
-        data: { data: data, action: 'getobj' },
-        success: function (response) {
-            var jsonData = JSON.parse(response)[0];
+    function getObj(data) {
+
+    async function Tr() {
+        $.ajax({
+            type: "GET",
+            url: '/engine/requests.php',
+            data: { data: data, action: 'getobj' },
+            success: await function (response) {
+                var jsonData = JSON.parse(response)[0];
+
+                for (let key of Object.keys(jsonData)) {
+
+                }
+                return jsonData
+            }
+        });
+
+        function test(a) {
+            let test = a;
+            console.log(test)
         }
-    });
+    }
+
+    Tr().then(alert);
+
 }
+
 
 let setObj = function (data) {
     $.ajax({
