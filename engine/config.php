@@ -12,20 +12,24 @@ require 'class/'.$url.'_class.php';
 
 $Page = new test();
 
-echo "<script>var loadPageObj = JSON.parse(".json_encode($test->Action()).");</script>";
+echo "<script>var loadPageObj = JSON.parse(".json_encode($Page->Action()).");</script>";
 
 ?>
 
 <script>
     function parseFunc(obj) {
+
         for (let key in obj) {
-            if(typeof obj[key] === "object") {
-                viewModel[key] = ko.observable(obj[key]);
-            }
-            if(typeof obj[key] === "array") {
-                viewModel[key] = ko.observableArray(obj[key]);
-            }
+            viewModel[key] = ko.observableArray(Array.from(obj[key]));
+            viewModel[key]().forEach(
+                function (i) {
+                    for (let key in i) {
+                        i[key] = ko.observable(i[key]);
+                    }
+                }
+            )
         }
     }
+
     parseFunc(loadPageObj);
 </script>

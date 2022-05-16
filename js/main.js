@@ -38,59 +38,68 @@ function getDB() {
     }
 }
 
+// Создание слепка записи
 function newObj(name) {
     let row = {};
-    let obj = viewModel[name]();
-    for (let key in obj[0]) {
+    for (let key in viewModel[name]()[0]) {
         row[key] = ko.observable('');
     }
-    row.dbname = name;
-    row.id = '';
-    row.userid = +cookieObj.userid;
+    row.userid = ko.observable(+cookieObj.userid);
     storage.set(name, row);
 }
 
-function set(obj) {
-    let row = {};
-    for (let key in obj) {
-        row[key] = obj[key]
-        if (typeof row[key] === "function") {
-            row[key] = row[key]();
-        }
-    }
-    viewModel[obj.dbname].push(obj);
-    setObj(row);
-}
-
-    function getObj(data) {
-
-    async function Tr() {
-        $.ajax({
-            type: "GET",
-            url: '/engine/requests.php',
-            data: { data: data, action: 'getobj' },
-            success: await function (response) {
-                var jsonData = JSON.parse(response)[0];
-
-                for (let key of Object.keys(jsonData)) {
-
-                }
-                return jsonData
+function createNew(str) {
+    for (let key in storage.get(str)) {
+        if (typeof storage.get(str)[key] === 'function') {
+            if (key !== 'userid') {
+                storage.get(str)[key]('');
             }
-        });
-
-        function test(a) {
-            let test = a;
-            console.log(test)
+        } else {
+            if (key !== 'userid') {
+                storage.get(str)[key] = '';
+            }
         }
     }
+}
 
-    Tr().then(alert);
+// Запись в базу
+function set(str, obj) {
+    if (typeof obj.id === 'function' && obj.id() === '' || typeof obj.id !== 'function' && obj.id === '') {
+        viewModel[str].push(obj);
+
+        for ( let key in obj) {
+            obj[key] = obj[key]();
+        }
+        setObj(str, obj);
+    } else {
+        for (let key in viewModel[str]().find(i => i.id() === obj.id())) {
+            viewModel[str]().find(i => i.id() === obj.id())[key](storage.get(str)[key]());
+        }
+
+        for ( let key in storage.get(str)) {
+            storage.get(str)[key] = storage.get(str)[key]();
+        }
+        updateNote(str, storage.get(str))
+    }
 
 }
 
+// запрос на обновление записи в базе
+function updateNote(str, data) {
+    data['dbname'] = str;
+    $.ajax({
+        type: "POST",
+        url: '/engine/requests.php',
+        data: { data: data, action: 'update' },
+        success: function (response) {
+            var jsonData = JSON.parse(response);
+        }
+    });
+}
 
-let setObj = function (data) {
+// запрос на запись в базу
+let setObj = function (str, data) {
+    data['dbname'] = str;
     $.ajax({
         type: "POST",
         url: '/engine/requests.php',
@@ -101,8 +110,8 @@ let setObj = function (data) {
     });
 }
 
+// Удаление записи из вьюхи и базы
 function remove(db, id) {
-    arr = viewModel[db]()
     data = { dbname: db, id: id };
     index = viewModel[db]().findIndex(i => i.id === id);
     viewModel[db].splice(index, 1);
@@ -116,6 +125,16 @@ function remove(db, id) {
     });
 }
 
+function setData(str, data) {
+
+    for (let key in data) {
+        storage.get(str)[key](data[key]());
+    }
+
+
+}
+
+// Очистка полей форм
 function clearForm() {
     let inputParentArr = document.querySelectorAll(".inputs-to-clear");
 
@@ -140,6 +159,7 @@ function editOneField(db, id, obj) {
     });
 }
 
+// Получение айди из строки URL
 function getIdFromUrl() {
     let urlArr = window.location.href.split('/');
     let gettedId = urlArr.pop();

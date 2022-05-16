@@ -146,7 +146,7 @@ if ($_REQUEST['action'] === 'getnote') {
 }
 
     // Изменение одного поля в записи
-if ($_REQUEST['action'] === 'getonenote') {
+if ($_REQUEST['action'] === 'update') {
     if ($_REQUEST['data']) {
         $mysql = new mysqli("youtask", "mysql", "", "youtask");
         $mysql->query("SET NAMES 'utf8'");
@@ -155,15 +155,34 @@ if ($_REQUEST['action'] === 'getonenote') {
             echo json_encode(array('success' => 0, 'Error Number: ' => $mysql->connect_errno, 'Error: ' => $mysql->connect_error));
         }
 
-        $dbname = strval($_REQUEST['data']['dbname']);
+        $dbname = $_REQUEST['data']['dbname'];
         $id = $_REQUEST['data']['id'];
-        $key = $_REQUEST['data']['key'][0];
-        $value = $_REQUEST['data']['value'][0];
 
-        $sqlquery = "UPDATE `".$dbname."` SET `".$key."` = '".$value."' WHERE id=".$id;
+        $keyarr = array();
+        $valuearr = array();
 
-        $mysql->query($sqlquery);
-        echo json_encode($sqlquery);
+        for ($i = 1; $i < count($_REQUEST['data']) - 1; $i++) {
+            array_push($keyarr, array_keys($_REQUEST['data'])[$i]);
+        }
 
+        for ($i = 1; $i < count($_REQUEST['data']) - 1; $i++) {
+            array_push($valuearr, $_REQUEST['data'][array_keys($_REQUEST['data'])[$i]]);
+        }
+
+        $keysstring = "`" . implode("`, `", $keyarr) . "`";
+        $valuestring = "'" . implode("', '", $valuearr) . "'";
+        $finalarr = [];
+
+        for ($i = 0; $i < count($keyarr); $i++) {
+            array_push($finalarr, ($keyarr[$i]." = '".$valuearr[$i]."'"));
+        }
+
+        $finalstring = implode(", ", $finalarr);
+
+        $insertquery = "UPDATE `" . $dbname . "` SET ".$finalstring." WHERE id=".$id;
+
+        $mysql->query($insertquery);
+
+        echo json_encode(array('success' => 0));
     }
 }

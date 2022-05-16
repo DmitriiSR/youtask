@@ -6,7 +6,8 @@ class test extends MainClass {
     {
         $action = array(
             "tasks" => $this->getList('tasks'),
-            "tasksSkeleton" => $this->getSkeleton('tasks')
+            "users" => $this->getList('users'),
+            "tasksSkeleton" => $this->getSkeleton('tasks'),
         );
         return json_encode($action);
     }
