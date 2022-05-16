@@ -2,12 +2,7 @@
 
 $auth = true;
 setcookie("auth", $auth, time() - 2592000);
-
-$url = $_SERVER['REQUEST_URI'];
-$url = explode('?', $url);
-$url = $url[0];
-$url = mb_substr($url, 1, -4);;
-
+require_once 'engine/variable.php';
 require 'class/'.$url.'_class.php';
 
 $Page = new test();
@@ -32,4 +27,5 @@ echo "<script>var loadPageObj = JSON.parse(".json_encode($Page->Action()).");</s
     }
 
     parseFunc(loadPageObj);
+
 </script>

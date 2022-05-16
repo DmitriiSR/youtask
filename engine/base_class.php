@@ -1,5 +1,5 @@
 <?php
-
+require_once 'engine/variable.php';
 class MainClass {
 
     function getURL() {
@@ -35,9 +35,8 @@ class MainClass {
             return $tablearr;
         }
     }
-    function getList($str)
+    function getListAll($str)
     {
-
                 $mysql = new mysqli("youtask", "mysql", "", "youtask");
                 $mysql->query("SET NAMES 'utf8'");
 
@@ -72,4 +71,41 @@ class MainClass {
 
 
             }
+    function getItemsByUserId($str)
+    {
+        $mysql = new mysqli("youtask", "mysql", "", "youtask");
+        $mysql->query("SET NAMES 'utf8'");
+
+        if ($mysql->connect_error) {
+            echo json_encode(array('success' => 0, 'Error Number: ' => $mysql->connect_errno, 'Error: ' => $mysql->connect_error));
+        }
+
+        // echo json_encode($_REQUEST['data']);
+
+        $dbname = strval($str);
+
+        $userid = $_COOKIE['userid'];
+        $sqlquery = "SELECT * FROM `".$dbname."` WHERE userid=".$userid;
+
+        $table = $mysql->query($sqlquery);
+
+        $finalarr = array();
+
+        while ($row = $table->fetch_assoc()) {
+
+
+
+            for ($i = 0; $i < count($row); $i++) {
+                $key = array_keys($row)[$i];
+
+                $tablearr[array_keys($row)[$i]] = $row[$key];
+            }
+
+            array_push($finalarr, $tablearr);
+        }
+
+        return $finalarr;
+
+
+    }
 }
