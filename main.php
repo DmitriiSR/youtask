@@ -1,7 +1,7 @@
 <?php require_once "components/header.php"?>
-<script>
-    newObj('tasks');
-</script>
+<!--<script>-->
+<!--    newObj('tasks');-->
+<!--</script>-->
 <div class="container py-5">
     <button data-bind="click: function () { createNew('tasks') }" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTask" >Добавить</button>
      <!-- ko foreach: viewModel.tasks -->

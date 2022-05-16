@@ -38,16 +38,6 @@ function getDB() {
     }
 }
 
-// Создание слепка записи
-function newObj(name) {
-    let row = {};
-    for (let key in viewModel[name]()[0]) {
-        row[key] = ko.observable('');
-    }
-    row.userid = ko.observable(+cookieObj.userid);
-    storage.set(name, row);
-}
-
 function createNew(str) {
     for (let key in storage.get(str)) {
         if (typeof storage.get(str)[key] === 'function') {

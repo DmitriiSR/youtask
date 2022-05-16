@@ -19,22 +19,20 @@ class MainClass {
 
         $dbname = strval($str);
 
-        $selectquery = "SELECT * FROM `" . $dbname . "`";
+        $selectquery = "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='youtask'  AND `TABLE_NAME`='".$dbname ."'";
 
         $table = $mysql->query($selectquery);
 
-
-        while ($row = $table->fetch_assoc()) {
-
-            $tablearr = [];
-
-            for ($i = 0; $i < count($row); $i++) {
-                $key = array_keys($row)[$i];
-                $tablearr[array_keys($row)[$i]] = '';
-            }
-            return $tablearr;
+        $tablearr = [];
+        foreach ($table as $row) {
+            array_push($tablearr, $row['COLUMN_NAME']);
         }
+
+
+    return $tablearr;
     }
+
+    // Получение всех записей
     function getListAll($str)
     {
                 $mysql = new mysqli("youtask", "mysql", "", "youtask");
@@ -71,6 +69,8 @@ class MainClass {
 
 
             }
+
+    // Получение записей по текущему юзеру
     function getItemsByUserId($str)
     {
         $mysql = new mysqli("youtask", "mysql", "", "youtask");
