@@ -56,20 +56,24 @@ function createNew(str) {
 function set(str, obj) {
     if (typeof obj.id === 'function' && obj.id() === '' || typeof obj.id !== 'function' && obj.id === '') {
         viewModel[str].push(obj);
-
         for ( let key in obj) {
             obj[key] = obj[key]();
         }
         setObj(str, obj);
+        for ( let key in obj) {
+            obj[key] = ko.observable(obj[key]);
+        }
     } else {
         for (let key in viewModel[str]().find(i => i.id() === obj.id())) {
             viewModel[str]().find(i => i.id() === obj.id())[key](storage.get(str)[key]());
         }
-
         for ( let key in storage.get(str)) {
             storage.get(str)[key] = storage.get(str)[key]();
         }
-        updateNote(str, storage.get(str))
+        updateNote(str, storage.get(str).map( (elem) => elem = elem() ));
+        for ( let key in storage.get(str)) {
+            storage.get(str)[key] = ko.observable(storage.get(str)[key]);
+        }
     }
 
 }

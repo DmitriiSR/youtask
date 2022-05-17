@@ -1,7 +1,7 @@
 <?php
 include 'engine/base_class.php';
 require_once 'engine/variable.php';
-class test extends MainClass {
+class pageClass extends MainClass {
 
     function Action()
     {
@@ -14,5 +14,4 @@ class test extends MainClass {
     }
 }
 
-$test = new test();
 

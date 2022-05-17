@@ -6,9 +6,7 @@ class pageClass extends MainClass {
     function Action()
     {
         $action = array(
-            "tasks" => $this->getItemsByUserId('tasks'),
-            "skeleton_tasks" => $this->getSkeleton('tasks'),
-            "skeleton_users" => $this->getSkeleton('users')
+
         );
         return json_encode($action);
     }
