@@ -13,19 +13,39 @@ setcookie("auth", $auth, time() - 2592000);
         <div class="col-10 ms-auto p-5">
             <?php require_once "components/header-row.php"?>
                 <div class="mt-5">
-                    <a href="#" data-bind="click: function () {createNew('tasks');}" data-bs-toggle="modal" data-bs-target="#addTask" type="button" id="addTaskButton" style="color: var(--color1);"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-plus-circle me-3" viewBox="0 0 16 16">
+                    <a href="#" data-bind="click: function () {createNew('tasks'); clearForm();}" data-bs-toggle="modal" data-bs-target="#addTask" type="button" id="addTaskButton" style="color: var(--color1);"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-plus-circle me-3" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                         </svg>Добавить задачу</a>
                 </div>
                     <div class="row d-flex">
                         <!-- ko foreach: viewModel.tasks -->
-                            <div class="col-md-4 col-sm-12">
-                                <div class="card me-3 mt-4 rounded-3">
-                                    <img src="https://via.placeholder.com/300.png/09f/fffC/" class="card-img-top" alt="...">
+                            <div class="col-12 col-sm-6 col-md-4 col-xl-3 mt-4">
+                                <div class="card">
                                     <div class="card-body">
                                         <h5 data-bind="text: tasktitle" class="card-title"></h5>
-                                        <button data-bind="click: function () {remove('tasks', id)}" class="btn btn-success">Выполнить</button>
+                                        <p data-bind="text: tasktext" class="card-text"></p>
+                                        <div class="pb-3 d-flex flex-wrap">
+                                             <!-- ko if: taskdate() !== '' -->
+                                                <div class="badge bg-light text-wrap text-black-50 d-flex align-items-center" style="width: fit-content">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock me-1" viewBox="0 0 16 16">
+                                                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                                                    </svg>
+                                                    <span data-bind="text: DateTime.fromISO(taskdate()).toFormat('dd.LL.yyyy')" class=""></span>
+                                                </div>
+                                            <!-- /ko -->
+                                            <div class="badge bg-info text-wrap text-white d-flex align-items-center ms-3" style="width: fit-content">
+                                                <span class="">Учеба</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center flex-wrap">
+                                            <button href="#" class="btn btn-success me-3">Выполнено</button>
+                                            <div class="">
+                                                <a href="#" class="card-link text-primary">Редактировать</a>
+                                                <a href="#" class="card-link text-danger">Удалить</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -44,16 +64,31 @@ setcookie("auth", $auth, time() - 2592000);
             </div>
             <div class="modal-body inputs-to-clear">
                 <label class="form-label w-100 mb-3">
-                <span>Название задачи</span>
-                <input data-bind="value: storage.get('tasks').tasktitle;" type="text" class="form-control">
+                    <span>Название задачи</span>
+                    <input data-bind="value: storage.get('tasks').tasktitle;" type="text" class="form-control">
                 </label>
+                <div data-bind="foreach: viewModel.inputsArr" class="">
+                    <div class="d-flex align-items-center">
+                            <label class="form-label w-100 mb-3">
+                                <span>Закончить к:</span>
+                                <input data-bind="value: storage.get('tasks').taskdate, attr: {min: DateTime.now().toFormat('yyyy-LL-dd')}" type="date" class="form-control">
+                            </label>
+                            <a href="#" data-bind="click: function () {
+                                viewModel.inputsArr(viewModel.ebala(viewModel.inputsArr(), 'date'));}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg ms-3" viewBox="0 0 16 16">
+                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                            </svg>
+                            </a>
+                    </div>
+                </div>
+                        
             </div>
             <div class="modal-body icons-block">
-                <a href="#" title="Добавить дату">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar4" viewBox="0 0 16 16">
-                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z"/>
-                    </svg>
-                </a>
+                    <a href="#" data-bind="click: function () {if(!viewModel.inputsArr().includes('date')){ viewModel.inputsArr.push('date')}}" title="Добавить дату">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar4" viewBox="0 0 16 16">
+                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z"/>
+                        </svg>
+                    </a>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
@@ -70,6 +105,11 @@ setcookie("auth", $auth, time() - 2592000);
 <script>
     viewModel.filter = ko.observable('all');
     viewModel.linkIndicator = 'myTasks';
+    viewModel.inputsArr = ko.observableArray([]);
+    viewModel.ebala = function (arr, str) {
+        arr.splice(str);
+        return arr;
+    }
 
 
 
