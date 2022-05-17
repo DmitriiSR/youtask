@@ -3,8 +3,9 @@ if (!$_COOKIE['auth_user']) {
     $newurl = '';
     header('location: http://youtask/auth.php');
 }
-
 ?>
+
+
 <!doctype html>
 <html lang="ru">
 <head>
@@ -30,5 +31,6 @@ if (!$_COOKIE['auth_user']) {
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-datepicker.min.js"></script>
 <script src="js/bootstrap-datepicker.ru.min.js"></script>
+<script src='https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'></script>
 <?php require 'engine/config.php'?>
 
