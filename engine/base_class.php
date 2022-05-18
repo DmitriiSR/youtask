@@ -103,9 +103,28 @@ class MainClass {
 
             array_push($finalarr, $tablearr);
         }
-
         return $finalarr;
+    }
 
+ function setSearching($str) {
+         $mysql = new mysqli("youtask", "mysql", "", "youtask");
+         $mysql->query("SET NAMES 'utf8'");
 
+         if ($mysql->connect_error) {
+             echo json_encode(array('success' => 0, 'Error Number: ' => $mysql->connect_errno, 'Error: ' => $mysql->connect_error));
+         }
+
+         $dbname = strval($str);
+
+         $selectquery = "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='youtask'  AND `TABLE_NAME`='".$dbname ."'";
+
+         $table = $mysql->query($selectquery);
+
+         $tablearr = [];
+         foreach ($table as $row) {
+             array_push($tablearr, $row['COLUMN_NAME']);
+         }
+
+         return $tablearr;
     }
 }

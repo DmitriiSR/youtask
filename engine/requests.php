@@ -36,6 +36,44 @@ if ($_REQUEST['action'] === 'read') {
     }
 }
 
+// Получение всех записей из базы
+if ($_REQUEST['action'] === 'search') {
+    if (isset($_REQUEST['data']) && $_REQUEST['data']) {
+        $mysql = new mysqli("youtask", "mysql", "", "youtask");
+        $mysql->query("SET NAMES 'utf8'");
+
+        if ($mysql->connect_error) {
+            echo json_encode(array('success' => 0, 'Error Number: ' => $mysql->connect_errno, 'Error: ' => $mysql->connect_error));
+        }
+
+        // echo json_encode($_REQUEST['data']);
+
+        $dbname = strval($_REQUEST['data']['dbname']);
+        $key = strval($_REQUEST['data']['name']);
+        $value = strval($_REQUEST['data']['value']);
+
+        $sqlquery = "SELECT * FROM `".$dbname."` WHERE ".$key." LIKE '%".$value."%'";
+
+        $table = $mysql->query($sqlquery);
+
+        $finalarr = array();
+
+        while ($row = $table->fetch_assoc()) {
+
+            $tablearr = array();
+
+            for ($i = 0; $i < count($row); $i++) {
+                $key = array_keys($row)[$i];
+
+                $tablearr[array_keys($row)[$i]] = $row[$key];
+            }
+
+            array_push($finalarr, $tablearr);
+        }
+        echo json_encode($finalarr);
+    }
+}
+
 // получение структуры базы данных
 if ($_REQUEST['action'] === 'getobj') {
     if (isset($_REQUEST['data']) && $_REQUEST['data']) {

@@ -8,7 +8,7 @@ class pageClass extends MainClass {
         $action = array(
             "tasks" => $this->getItemsByUserId('tasks'),
             "skeleton_tasks" => $this->getSkeleton('tasks'),
-            "skeleton_users" => $this->getSkeleton('users')
+            "search_tasks" => $this->setSearching('tasks')
         );
         return json_encode($action);
     }
