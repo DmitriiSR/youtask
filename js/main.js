@@ -54,28 +54,31 @@ function createNew(str) {
 
 // Запись в базу
 function set(str, obj) {
+    setObservable(str);
+
     if (typeof obj.id === 'function' && obj.id() === '' || typeof obj.id !== 'function' && obj.id === '') {
         viewModel[str].push(obj);
-        for ( let key in obj) {
+        for (let key in obj) {
             obj[key] = obj[key]();
         }
         setObj(str, obj);
-        for ( let key in obj) {
+        for (let key in obj) {
             obj[key] = ko.observable(obj[key]);
         }
     } else {
         for (let key in viewModel[str]().find(i => i.id() === obj.id())) {
             viewModel[str]().find(i => i.id() === obj.id())[key](storage.get(str)[key]());
         }
-        for ( let key in storage.get(str)) {
+        for (let key in storage.get(str)) {
             storage.get(str)[key] = storage.get(str)[key]();
         }
-        updateNote(str, storage.get(str).map( (elem) => elem = elem() ));
-        for ( let key in storage.get(str)) {
+        updateNote(str, storage.get(str));
+        for (let key in storage.get(str)) {
             storage.get(str)[key] = ko.observable(storage.get(str)[key]);
         }
     }
-
+    setObservable(str);
+    cleanStorage(str);
 }
 
 // запрос на обновление записи в базе
@@ -100,6 +103,7 @@ let setObj = function (str, data) {
         data: { data: data, action: 'write' },
         success: function (response) {
             var jsonData = JSON.parse(response);
+            console.log(jsonData);
         }
     });
 }
@@ -120,7 +124,15 @@ function remove(db, id) {
 }
 
 function setData(str, data) {
+    cleanStorage(str);
     for (let key in data) {
+        if (typeof storage.get(str)[key] !== 'function') {
+            storage.get(str)[key] = ko.observable(storage.get(str)[key]);
+        }
+
+        if (typeof data[key] !== 'function') {
+            data[key] = ko.observable(data[key]);
+        }
         storage.get(str)[key](data[key]());
     }
 }
@@ -163,10 +175,32 @@ function search(name, key, value) {
     $.ajax({
         type: "POST",
         url: '/engine/requests.php',
-        data: {  data: data, action: 'search' },
+        data: { data: data, action: 'search' },
         success: function (response) {
             var jsonData = JSON.parse(response);
             viewModel[key](jsonData);
         }
     });
+}
+
+// Приведение к observable
+
+function setObservable(str) {
+    let arr = viewModel[str]();
+    arr.forEach(function (elem) {
+        for (let key in elem) {
+            if (typeof elem[key] !== 'function') {
+                elem[key] = ko.observable(elem[key]);
+            }
+        }
+    })
+    viewModel[str](arr);
+}
+
+// Обнуление storage
+
+function cleanStorage(str) {
+    // for (let key in storage.get(str)) {
+    //     storage.get(str)[key] = ko.observable('');
+    // }
 }

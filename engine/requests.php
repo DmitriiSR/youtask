@@ -134,10 +134,27 @@ if ($_REQUEST['action'] === 'write') {
 
         $insertquery = "INSERT INTO `" . $dbname . "`(" . $keysstring . ") VALUES (" . $valuestring . ")";
 
-
         $mysql->query($insertquery);
 
-        echo json_encode($insertquery);
+        $getLastIdQuery = "SELECT * FROM ". $dbname ." ORDER BY id DESC LIMIT 1";
+
+        $table = $mysql->query($getLastIdQuery);
+
+        $finalarr = array();
+
+        while ($row = $table->fetch_assoc()) {
+
+            $tablearr = array();
+
+            for ($i = 0; $i < count($row); $i++) {
+                $key = array_keys($row)[$i];
+
+                $tablearr[array_keys($row)[$i]] = $row[$key];
+            }
+
+            array_push($finalarr, $tablearr);
+        }
+        echo json_encode($finalarr[0]['id']);
     }
 }
 
