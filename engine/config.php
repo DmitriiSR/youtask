@@ -11,6 +11,7 @@ if ($url !== '') {
 
     echo "
     <script>
+        viewModel.filter = {};
         function parseFunc(obj) {
             for (let key in obj) {
                 if (key.includes('skeleton_')) {
@@ -21,6 +22,13 @@ if ($url !== '') {
                     }
                      row.userid = ko.observable(+cookieObj.userid);
                      storage.set(name, row);
+                } else if (key.includes('search_')) {
+                    let row = {};
+                    for (let i = 0; i < obj[key].length; i++) {
+                        row[obj[key][i]] = '';
+                    }
+                    name = key.substr(7);
+                    viewModel.filter[name] = row;
                 } else {
                     viewModel[key] = ko.observableArray(Array.from(obj[key]));
                     viewModel[key]().forEach(
@@ -35,7 +43,17 @@ if ($url !== '') {
         }
     
         parseFunc(loadPageObj);
-    
+       
+        for (let key in viewModel.filter) {
+
+            for (let i in viewModel.filter[key]) {
+                viewModel.filter[key][i] = ko.observable('');
+                viewModel.filter[key][i].subscribe(function (value) {
+                    search(i, key, value);
+                })
+            }
+        }
+        
     </script>
     ";
 }

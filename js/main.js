@@ -120,12 +120,9 @@ function remove(db, id) {
 }
 
 function setData(str, data) {
-
     for (let key in data) {
         storage.get(str)[key](data[key]());
     }
-
-
 }
 
 // Очистка полей форм
@@ -158,4 +155,18 @@ function getIdFromUrl() {
     let urlArr = window.location.href.split('/');
     let gettedId = urlArr.pop();
     return +gettedId;
+}
+
+// Запрос на поиск элементов
+function search(name, key, value) {
+    data = { dbname: key, name: name, value: value };
+    $.ajax({
+        type: "POST",
+        url: '/engine/requests.php',
+        data: {  data: data, action: 'search' },
+        success: function (response) {
+            var jsonData = JSON.parse(response);
+            viewModel[key](jsonData);
+        }
+    });
 }
