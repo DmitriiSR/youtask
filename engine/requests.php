@@ -121,12 +121,16 @@ if ($_REQUEST['action'] === 'write') {
         $keyarr = array();
         $valuearr = array();
 
-        for ($i = 1; $i < count($_REQUEST['data']) - 1; $i++) {
-            array_push($keyarr, array_keys($_REQUEST['data'])[$i]);
+        for ($i = 0; $i < count($_REQUEST['data']); $i++) {
+            if(array_keys($_REQUEST['data'])[$i] !== 'id' && array_keys($_REQUEST['data'])[$i] !== 'dbname' ) {
+                array_push($keyarr, array_keys($_REQUEST['data'])[$i]);
+            }
         }
 
-        for ($i = 1; $i < count($_REQUEST['data']) - 1; $i++) {
-            array_push($valuearr, $_REQUEST['data'][array_keys($_REQUEST['data'])[$i]]);
+        for ($i = 0; $i < count($_REQUEST['data']); $i++) {
+            if(array_keys($_REQUEST['data'])[$i] !== 'id' && array_keys($_REQUEST['data'])[$i] !== 'dbname' ) {
+                array_push($valuearr, $_REQUEST['data'][array_keys($_REQUEST['data'])[$i]]);
+            }
         }
 
         $keysstring = "`" . implode("`, `", $keyarr) . "`";
@@ -238,6 +242,24 @@ if ($_REQUEST['action'] === 'update') {
 
         $mysql->query($insertquery);
 
-        echo json_encode(array('success' => 0));
+        $getLastIdQuery = "SELECT * FROM ". $dbname ." ORDER BY id DESC LIMIT 1";
+
+        $table = $mysql->query($getLastIdQuery);
+
+        $finalarr = array();
+
+        while ($row = $table->fetch_assoc()) {
+
+            $tablearr = array();
+
+            for ($i = 0; $i < count($row); $i++) {
+                $key = array_keys($row)[$i];
+
+                $tablearr[array_keys($row)[$i]] = $row[$key];
+            }
+
+            array_push($finalarr, $tablearr);
+        }
+        echo json_encode($finalarr[0]['id']);
     }
 }

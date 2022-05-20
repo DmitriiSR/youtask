@@ -53,7 +53,7 @@ function createNew(str) {
 }
 
 // Запись в базу
-function set(str, obj) {
+function set(str, obj, callback) {
     setObservable(str);
 
     if (typeof obj.id === 'function' && obj.id() === '' || typeof obj.id !== 'function' && obj.id === '') {
@@ -61,7 +61,7 @@ function set(str, obj) {
         for (let key in obj) {
             obj[key] = obj[key]();
         }
-        setObj(str, obj);
+        setObj(str, obj, callback);
         for (let key in obj) {
             obj[key] = ko.observable(obj[key]);
         }
@@ -72,7 +72,7 @@ function set(str, obj) {
         for (let key in storage.get(str)) {
             storage.get(str)[key] = storage.get(str)[key]();
         }
-        updateNote(str, storage.get(str));
+        updateNote(str, storage.get(str), callback);
         for (let key in storage.get(str)) {
             storage.get(str)[key] = ko.observable(storage.get(str)[key]);
         }
@@ -82,7 +82,7 @@ function set(str, obj) {
 }
 
 // запрос на обновление записи в базе
-function updateNote(str, data) {
+function updateNote(str, data, callback) {
     data['dbname'] = str;
     $.ajax({
         type: "POST",
@@ -90,12 +90,16 @@ function updateNote(str, data) {
         data: { data: data, action: 'update' },
         success: function (response) {
             var jsonData = JSON.parse(response);
+            if (!!callback) {
+                callback(jsonData);
+            }
         }
     });
 }
 
 // запрос на запись в базу
-let setObj = function (str, data) {
+let setObj = function (str, data, callback) {
+    console.log(data);
     data['dbname'] = str;
     $.ajax({
         type: "POST",
@@ -103,7 +107,9 @@ let setObj = function (str, data) {
         data: { data: data, action: 'write' },
         success: function (response) {
             var jsonData = JSON.parse(response);
-            console.log(jsonData);
+            if (!!callback) {
+                callback(jsonData);
+            }
         }
     });
 }

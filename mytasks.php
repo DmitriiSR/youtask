@@ -56,9 +56,13 @@
                                                     <span data-bind="text: DateTime.fromISO(taskdate()).toFormat('dd.LL.yyyy')"></span>
                                                 </div>
                                             <!-- /ko -->
-                                            <div class="badge bg-info text-wrap text-white d-flex align-items-center" style="width: fit-content">
-                                                <span class="">Учеба</span>
-                                            </div>
+                                             <!-- ko foreach: viewModel.tasks_categories -->
+                                                    <!-- ko if: $parent.category_id() === id() -->
+                                                        <div data-bind="attr: {style: 'background-color:' + color() + ';'}" class="badge text-wrap text-white d-flex align-items-center" style="width: fit-content">
+                                                          <span data-bind="text: title"></span>
+                                                        </div>
+                                                    <!-- /ko -->
+                                              <!-- /ko -->
                                         </div>
                                         <div class="d-flex align-items-center flex-wrap">
                                             <button href="#" class="btn btn-success me-3">Выполнено</button>
@@ -106,7 +110,7 @@
                             </a>
                     </div>
                     <!-- /ko -->
-                    
+
                     <!-- ko if: $data === 'tasktext' -->
                     <div class="d-flex align-items-center">
                         <label class="form-label w-100 mb-3">
@@ -139,7 +143,7 @@
                                     <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
                                 </svg>
                                 </a>
-                    </div>                
+                    </div>
                 </div>
 
             </div>
@@ -158,7 +162,7 @@
                         </svg>
                     </a>
 
-                    <a href="#" class="me-3" data-bind="click: function () { 
+                    <a href="#" class="me-3" data-bind="click: function () {
                         createNew('tasks_categories');
                         viewModel.taskCategoryVisible(true);
                     }" title="Добавить категорию">
@@ -176,18 +180,22 @@
                 <button data-bind="click: function () {
                         storage.get('tasks').project_id(0);
                         storage.get('tasks').status('open');
-                        storage.get('tasks').category_id(0);
-                        set('tasks', storage.get('tasks'));
                         if (storage.get('tasks_categories').title() !== '') {
-                            set('tasks_categories', storage.get('tasks_categories'));
+                            set('tasks_categories', storage.get('tasks_categories'), function (res) {
+                                storage.get('tasks').category_id(res);
+                                set('tasks', storage.get('tasks'), () => window.location.reload());
+                            });
+                        } else {
+                            storage.get('tasks').category_id(0);
+                            set('tasks', storage.get('tasks'), () => window.location.reload());
                         }
+
                     }" type="button" class="btn btn-primary" data-bs-dismiss="modal">Добавить</button>
                 <!-- /ko -->
 
                 <!-- ko if: storage.get('tasks').id() !== '' -->
                 <button data-bind="click: function () {
-                        set('tasks', storage.get('tasks'));
-                        window.location.reload();
+                        set('tasks', storage.get('tasks'), () => window.location.reload());
                     }" type="button" class="btn btn-primary" data-bs-dismiss="modal">Сохранить</button>
                 <!-- /ko -->
             </div>
@@ -212,10 +220,8 @@
                 let index = arr.indexOf(key);
                 arr.splice(index, 1);
             }
-        } 
-
+        }
         viewModel.inputsArr(arr);
-        console.log(arr);
     }
     viewModel.taskCategoryVisible = ko.observable(false);
 
