@@ -36,13 +36,7 @@
                 <div class="col-3">
                     <label class="form-label w-100 me-2">
                         <span>Категории</span>
-                        <select class="form-select" id="example-getting-started" multiple="">
-                            <option value="cheese">Cheese</option>
-                            <option value="tomatoes">Tomatoes</option>
-                            <option value="mozarella">Mozzarella</option>
-                            <option value="mushrooms">Mushrooms</option>
-                            <option value="pepperoni">Pepperoni</option>
-                            <option value="onions">Onions</option>
+                        <select data-bind="multiselect: viewModel.categoriesArr(), value: viewModel.filter.tasks.category_id" class="form-select">
                         </select>
                     </label>
                 </div>
@@ -242,9 +236,22 @@
     }
     viewModel.taskCategoryVisible = ko.observable(false);
 
-</script>
-<script type="text/javascript">
-        $('#example-getting-started').chosen();
+    viewModel.categoriesArr = ko.observableArray(
+        viewModel.tasks_categories().map(function (elem) {
+            let finalElem = {};
+            for (let key in elem) {
+                if(key === 'id' || key === 'title') {
+                    if (key === 'id') {
+                        finalElem.value = elem[key]();
+                    } else {
+                        finalElem.key = elem[key]();
+                    }
+                }
+            }
+            return finalElem;
+        })
+    )
+
 </script>
 
 <?php require_once "components/footer.php"?>

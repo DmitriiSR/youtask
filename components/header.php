@@ -33,5 +33,6 @@ if (!$_COOKIE['auth_user']) {
 <script src="js/bootstrap-datepicker.ru.min.js"></script>
 <script src="js/chosen.jquery.js"></script>
 <script src='https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'></script>
+<script src="js/binding_handlers.js"></script>
 <?php require 'engine/config.php'?>
 

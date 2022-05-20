@@ -188,7 +188,6 @@ function search(name, key, value) {
                     }
                 }
             })
-            console.log(jsonData);
             viewModel[key](jsonData);
         }
     });
