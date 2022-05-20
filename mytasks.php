@@ -1,6 +1,5 @@
 <?php require_once "components/header.php"?>
 
-
 <body>
 
 <div class="mytasks">
@@ -27,10 +26,28 @@
                         </label>
 
                     </div>
-
-
+                </div>
+                <div class="col-3">
+                    <label class="form-label w-100 me-2">
+                        <span>Поиск по дате</span>
+                        <input data-bind="value: viewModel.filter.tasks.taskdate" type="date" class="form-control">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label class="form-label w-100 me-2">
+                        <span>Категории</span>
+                        <select class="form-select" id="example-getting-started" multiple="">
+                            <option value="cheese">Cheese</option>
+                            <option value="tomatoes">Tomatoes</option>
+                            <option value="mozarella">Mozzarella</option>
+                            <option value="mushrooms">Mushrooms</option>
+                            <option value="pepperoni">Pepperoni</option>
+                            <option value="onions">Onions</option>
+                        </select>
+                    </label>
                 </div>
             </div>
+
             <h2 class="mt-3">Задачи</h2>
                 <div>
                     <a href="#" data-bind="click: function () {createNew('tasks'); clearForm(); viewModel.inputsArr([]);}" data-bs-toggle="modal" data-bs-target="#addTask" type="button" id="addTaskButton" style="color: var(--color1);"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-plus-circle me-3" viewBox="0 0 16 16">
@@ -41,7 +58,7 @@
 
                     <div class="row d-flex">
                         <!-- ko foreach: viewModel.tasks -->
-                            <div class="col-12 col-sm-6 col-md-4 mt-4">
+                            <div class="col-12 col-sm-6 col-xxl-4 mt-4">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 data-bind="text: tasktitle" class="card-title"></h5>
@@ -226,6 +243,8 @@
     viewModel.taskCategoryVisible = ko.observable(false);
 
 </script>
-
+<script type="text/javascript">
+        $('#example-getting-started').chosen();
+</script>
 
 <?php require_once "components/footer.php"?>
