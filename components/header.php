@@ -29,10 +29,9 @@ if (!$_COOKIE['auth_user']) {
 <script src="js/luxon.js"></script>
 <script src="js/main.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/bootstrap-datepicker.min.js"></script>
-<script src="js/bootstrap-datepicker.ru.min.js"></script>
 <script src="js/chosen.jquery.js"></script>
 <script src='https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'></script>
 <script src="js/binding_handlers.js"></script>
+<script src="js/jquery.dm-uploader.min.js"></script>
 <?php require 'engine/config.php'?>
 
