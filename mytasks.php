@@ -41,8 +41,11 @@
                     </label>
                 </div>
             </div>
-
-            <h2 class="mt-3">Задачи</h2>
+            <div class="d-flex justify-content-between">
+                <h2 class="mt-3">Задачи</h2>
+                <h2 class="mt-3">Количество задач: <span data-bind="text: viewModel.tasks().length"></span></h2>
+            </div>
+            
                 <div>
                     <a href="#" data-bind="click: function () {createNew('tasks'); clearForm(); viewModel.inputsArr([]);}" data-bs-toggle="modal" data-bs-target="#addTask" type="button" id="addTaskButton" style="color: var(--color1);"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-plus-circle me-3" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -52,8 +55,8 @@
 
                     <div class="row d-flex">
                         <!-- ko foreach: viewModel.tasks -->
-                            <div class="col-12 col-sm-6 col-xxl-4 mt-4">
-                                <div class="card">
+                            <div class="col-12 col-sm-6 col-xxl-4 mt-4 card-wrapper">
+                                <div class="card custom-card">
                                     <div class="card-body">
                                         <h5 data-bind="text: tasktitle" class="card-title"></h5>
                                         <p data-bind="text: tasktext" class="card-text"></p>

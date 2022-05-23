@@ -1,210 +1,39 @@
+.custom-card {
+  -webkit-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.5);
+  position: relative;
+  -webkit-transition-duration: 0.4s;
+          transition-duration: 0.4s;
+  -webkit-transition-property: -webkit-box-shadow, -webkit-filter, -webkit-transform;
+  transition-property: -webkit-box-shadow, -webkit-filter, -webkit-transform;
+  transition-property: box-shadow, filter, transform;
+  transition-property: box-shadow, filter, transform, -webkit-box-shadow, -webkit-filter, -webkit-transform;
+  -webkit-transition-timing-function: cubic-bezier(0, 0.73, 0.48, 1);
+          transition-timing-function: cubic-bezier(0, 0.73, 0.48, 1);
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
 
-
+.custom-card:hover {
+  -webkit-box-shadow: 0px 14px 12px 0px rgba(0, 0, 0, 0.3);
+          box-shadow: 0px 14px 12px 0px rgba(0, 0, 0, 0.3);
+  -webkit-filter: brightness(1.1) contrast(0.95) saturate(1);
+          filter: brightness(1.1) contrast(0.95) saturate(1);
+  -webkit-transform: rotateX(3deg) translateZ(15px);
+          transform: rotateX(3deg) translateZ(15px);
+}
 
 .mytasks {
-    background: url(../images/mytasks/mytasks-background.png);
-    background-repeat: no-repeat;
-    background-position: right bottom!important;
+  background: url(../images/mytasks/mytasks-background.png);
+  background-repeat: no-repeat;
+  background-position: right bottom !important;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* .mytasks__wrapper {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    font-family: "Montserrat", sans-serif;
-    background-color: #dbf0ff;
-    background-image: url(../images/mytasks/mytasks-background.png);
-    background-repeat: no-repeat;
-    background-position: right bottom;
+.card-wrapper {
+  -webkit-perspective: 300px;
+          perspective: 300px;
+  -webkit-perspective-origin: 50%;
+          perspective-origin: 50%;
 }
-
-.tasks__filter {
-    width: max-content;
-    position: absolute;
-    top: 120%;
-    right: 0;
-    padding: 20px 30px;
-    background: #ffffff;
-    border-radius: 17px;
-    box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25);
-    z-index: 999;
-}
-
-.tasks__filter a:first-child {
-    font-family: "Montserrat";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    color: #53b6fd;
-}
-
-.tasks__filter a:nth-child(2) {
-    font-family: "Montserrat";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    color: #44c869;
-}
-
-.tasks__filter a:nth-child(3) {
-    font-family: "Montserrat";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    color: #dc2e2e;
-}
-
-.tasks__filter-btn {
-    margin-left: auto;
-    cursor: pointer;
-    position: relative;
-}
-
-.addtask {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 17px;
-    box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25);
-    position: absolute;
-    width: 544px;
-    z-index: 999;
-}
-
-.addtask input {
-    width: 100%;
-    height: 59px;
-    padding: 20px 24px;
-    border: 1.5px solid #53b6fd;
-    border-radius: 11px;
-    font-family: "Montserrat";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    color: #53b6fd;
-    opacity: 0.55;
-    background-color: transparent;
-}
-
-.buttons__block {
-    display: flex;
-    justify-content: space-between;
-}
-
-input#inputText {
-    color: black;
-}
-
-::-webkit-input-placeholder {
-    color: #53b6fd;
-}
-
-.warning__wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.warning {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 17px;
-    box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25);
-    width: max-content;
-    z-index: 9999999999;
-}
-
-.addtaskbtn {
-    padding: 0;
-    display: flex;
-    align-items: center;
-    border: none;
-    font: inherit;
-    color: inherit;
-    background-color: transparent;
-    cursor: pointer;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    color: #53b6fd;
-}
-
-.tasks {
-    max-width: 969px;
-    height: 100%;
-    padding: 17px 23px 17px 17px;
-    background-color: #ffffff;
-    box-shadow: 5px 5px 25px rgba(43, 144, 218, 0.25);
-    border-radius: 21px;
-}
-
-.tasks__header {
-    margin-top: 31px;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 20px;
-    color: #53b6fd;
-}
-
-.task {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(83, 182, 253, 0.21);
-    padding-bottom: 14px;
-} */
