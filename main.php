@@ -142,5 +142,22 @@
         </div>
     </div>
 </div>
+
+<div id="drop-area">
+  <h3>Drag and Drop Files Here<h3/>
+  <input type="file" title="Click to add Files">
+</div>
+<script>
+    $("#drop-area").dmUploader({
+    url: '../engine/upload.php',
+  //... More settings here...
+  
+  onInit: function(){
+    console.log('Callback: Plugin initialized');
+  }
+  
+  // ... More callbacks
+});
+</script>
 <?php require_once "components/footer.php"?>
 
