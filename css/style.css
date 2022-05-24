@@ -4,7 +4,6 @@
 @import "projects.css";
 @import "bootstrap-datepicker3.min.css";
 @import "404.css";
-@import "jquery.dm-uploader.min.css";
 
 :root {
     --color1: #53B6FD;
@@ -59,4 +58,32 @@ body {
 .btn:hover {
     background: rgba(83, 182, 253, 0.21);
     color: #53b6fd;
+}
+
+hr {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+#files {
+    overflow-y: scroll !important;
+    min-height: 320px;
+}
+@media (min-width: 768px) {
+    #files {
+        min-height: 0;
+    }
+}
+#debug {
+    overflow-y: scroll !important;
+    height: 180px;
+}
+
+.dm-uploader {
+    border: 0.25rem dashed #A5A5C7;
+    text-align: center;
+}
+.dm-uploader.active {
+    border-color: red;
+
+    border-style: solid;
 }

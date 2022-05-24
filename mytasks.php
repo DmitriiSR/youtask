@@ -36,7 +36,7 @@
                 <div class="col-3">
                     <label class="form-label w-100 me-2">
                         <span>Категории</span>
-                        <select data-bind="multiselect: viewModel.categoriesArr(), value: viewModel.filter.tasks.category_id" class="form-select">
+                        <select data-bind="multiselect: [1, 2, 3], value: viewModel.filter.tasks.category_id" class="form-select">
                         </select>
                     </label>
                 </div>
@@ -45,7 +45,7 @@
                 <h2 class="mt-3">Задачи</h2>
                 <h2 class="mt-3">Количество задач: <span data-bind="text: viewModel.tasks().length"></span></h2>
             </div>
-            
+
                 <div>
                     <a href="#" data-bind="click: function () {createNew('tasks'); clearForm(); viewModel.inputsArr([]);}" data-bs-toggle="modal" data-bs-target="#addTask" type="button" id="addTaskButton" style="color: var(--color1);"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-plus-circle me-3" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
