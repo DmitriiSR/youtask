@@ -1,9 +1,9 @@
 <?php require_once "components/header.php"?>
+<div data-bind="template: {name: 'file-upload-form', data: 'tasks'}"></div>
 
+<script type="text/html" id="file-upload-form">
     <div class="row">
         <div class="col-md-6 col-sm-12">
-
-            <!-- Our markup, the important part here! -->
             <div id="drag-and-drop-zone" class="dm-uploader p-5">
                 <h3 class="mb-5 mt-5 text-muted">Drag &amp; drop files here</h3>
 
@@ -11,8 +11,7 @@
                     <span>Open the file Browser</span>
                     <input type="file" title='Click to add Files' />
                 </div>
-            </div><!-- /uploader -->
-
+            </div>
         </div>
         <div class="col-md-6 col-sm-12">
             <div class="card h-100">
@@ -25,9 +24,9 @@
                 </ul>
             </div>
         </div>
-    </div><!-- /file list -->
+    </div>
 
-<!-- File item template -->
+</script>
 <script type="text/html" id="files-template">
     <li class="media">
         <div class="media-body mb-1">
@@ -45,11 +44,9 @@
         </div>
     </li>
 </script>
-<!-- Debug item template -->
 <script type="text/html" id="debug-template">
     <li class="list-group-item text-%%color%%"><strong>%%date%%</strong>: %%message%%</li>
 </script>
-
 
 <?php require_once "components/footer.php"?>
 

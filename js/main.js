@@ -96,7 +96,6 @@ function updateNote(str, data, callback) {
 
 // запрос на запись в базу
 let setObj = function (str, data, callback) {
-    console.log(data);
     data['dbname'] = str;
     $.ajax({
         type: "POST",

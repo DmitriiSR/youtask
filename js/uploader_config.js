@@ -67,12 +67,6 @@ function ui_multi_update_file_progress(id, percent, color, active) {
 // ====================================================================
 
 $(function(){
-    /*
-     * For the sake keeping the code clean and the examples simple this file
-     * contains only the plugin configuration & callbacks.
-     *
-     * UI functions ui_* can be located in: demo-ui.js
-     */
     $('#drag-and-drop-zone').dmUploader({ //
         url: '../engine/upload.php',
         maxFileSize: 3000000, // 3 Megs
@@ -113,12 +107,16 @@ $(function(){
             ui_multi_update_file_progress(id, percent);
         },
         onUploadSuccess: function(id, data){
-            // A file was successfully uploaded
             ui_add_log('Server Response for file #' + id + ': ' + JSON.stringify(data));
             ui_add_log('Upload of file #' + id + ' COMPLETED', 'success');
             ui_multi_update_file_status(id, 'success', 'Upload Complete');
             ui_multi_update_file_progress(id, 100, 'success', false);
-            console.log(data)
+            createNew('attachments');
+            storage.get('attachments').userid(cookieObj.userid);
+            storage.get('attachments').name(data);
+            set('attachments', storage.get('attachments'), function (res) {
+                storage.get('attachments').id(res);
+            });
         },
         onUploadError: function(id, xhr, status, message){
             ui_multi_update_file_status(id, 'danger', message);

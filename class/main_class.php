@@ -8,7 +8,9 @@ class pageClass extends MainClass {
         $action = array(
             "tasks" => $this->getItemsByUserId('tasks'),
             "skeleton_tasks" => $this->getSkeleton('tasks'),
-            "skeleton_users" => $this->getSkeleton('users')
+            "skeleton_users" => $this->getSkeleton('users'),
+            "skeleton_attachments" => $this->getSkeleton('attachments'),
+            "attachments" => $this->getItemsByUserId('attachments'),
         );
         return json_encode($action);
     }
