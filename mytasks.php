@@ -36,9 +36,26 @@
                 <div class="col-3">
                     <label class="form-label w-100 me-2">
                         <span>Категории</span>
-                        <select data-bind="multiselect: [1, 2, 3], value: viewModel.filter.tasks.category_id" class="form-select">
+                        <select data-bind="multiselect: viewModel.categoriesArr(), value: viewModel.filter.tasks.category_id" class="form-select">
                         </select>
                     </label>
+                </div>
+                <div class="col-3">
+                    <label class="form-label w-100 me-2">
+                        <span>Статус</span>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                Активные
+                                <input data-bind="click: function () {viewModel.checkStatus = viewModel.filter.tasks.status('open');}" class="form-check-input" type="radio">
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                Выполненные
+                                <input data-bind="click: function () {viewModel.checkStatus = viewModel.filter.tasks.status('done');}" class="form-check-input" type="radio">
+                            </label>
+                        </div>
+                    </label>        
                 </div>
             </div>
             <div class="d-flex justify-content-between">
@@ -55,42 +72,53 @@
 
                     <div class="row d-flex">
                         <!-- ko foreach: viewModel.tasks -->
-                            <div class="col-12 col-sm-6 col-xxl-4 mt-4 card-wrapper">
-                                <div class="card custom-card">
-                                    <div class="card-body">
-                                        <h5 data-bind="text: tasktitle" class="card-title"></h5>
-                                        <p data-bind="text: tasktext" class="card-text"></p>
-                                        <div class="pb-3 d-flex flex-wrap">
-                                            <!-- ko if: taskdate() !== '' -->
-                                                <div class="badge bg-light text-wrap text-black-50 d-flex align-items-center me-3" style="width: fit-content">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock me-1" viewBox="0 0 16 16">
-                                                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-                                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
-                                                    </svg>
-                                                    <span data-bind="text: DateTime.fromISO(taskdate()).toFormat('dd.LL.yyyy')"></span>
-                                                </div>
+                                <div class="col-12 col-sm-6 col-xxl-4 mt-4 card-wrapper">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <h5 data-bind="text: tasktitle" class="card-title"></h5>
+                                            <p data-bind="text: tasktext" class="card-text"></p>
+                                            <div class="pb-3 d-flex flex-wrap">
+                                                <!-- ko if: taskdate() !== '' -->
+                                                    <div class="badge bg-light text-wrap text-black-50 d-flex align-items-center me-3" style="width: fit-content">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock me-1" viewBox="0 0 16 16">
+                                                            <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                                                        </svg>
+                                                        <span data-bind="text: DateTime.fromISO(taskdate()).toFormat('dd.LL.yyyy')"></span>
+                                                    </div>
+                                                <!-- /ko -->
+                                                <!-- ko foreach: viewModel.tasks_categories -->
+                                                        <!-- ko if: $parent.category_id() === id() -->
+                                                            <div data-bind="attr: {style: 'background-color:' + color() + ';'}" class="badge text-wrap text-white d-flex align-items-center" style="width: fit-content">
+                                                            <span data-bind="text: title"></span>
+                                                            </div>
+                                                        <!-- /ko -->
+                                                <!-- /ko -->
+                                            </div>
+                                            <!-- ko foreach: viewModel.attachments -->
+                                                <!-- ko if: $parent.attachments() === $data.id() -->
+                                                    <a data-bind="text: name, attr: {href:'/files/' + name()}" target="_blank"></a>
+                                                <!-- /ko -->
                                             <!-- /ko -->
-                                             <!-- ko foreach: viewModel.tasks_categories -->
-                                                    <!-- ko if: $parent.category_id() === id() -->
-                                                        <div data-bind="attr: {style: 'background-color:' + color() + ';'}" class="badge text-wrap text-white d-flex align-items-center" style="width: fit-content">
-                                                          <span data-bind="text: title"></span>
-                                                        </div>
-                                                    <!-- /ko -->
-                                              <!-- /ko -->
-                                        </div>
-                                        <div class="d-flex align-items-center flex-wrap">
-                                            <button href="#" class="btn btn-success me-3">Выполнено</button>
-                                            <div class="">
-                                                <a href="#" data-bind="click: function () {
+                                            <div class="d-flex align-items-center flex-wrap">
+                                                <button data-bind="click: function () {
                                                     setData('tasks', $data);
-                                                    viewModel.checkInputsArr($data);
-                                                }" data-bs-toggle="modal" data-bs-target="#addTask" class="card-link text-primary">Редактировать</a>
-                                                <a data-bind="click: function () {remove('tasks', id)}" href="#" class="card-link text-danger">Удалить</a>
+                                                    storage.get('tasks').status('done');
+                                                    set('tasks', storage.get('tasks'), function () {
+                                                        window.location.reload();
+                                                    });
+                                                }" href="#" class="btn btn-success me-3">Выполнено</button>
+                                                <div class="">
+                                                    <a href="#" data-bind="click: function () {
+                                                        setData('tasks', $data);
+                                                        viewModel.checkInputsArr($data);
+                                                    }" data-bs-toggle="modal" data-bs-target="#addTask" class="card-link text-primary">Редактировать</a>
+                                                    <a data-bind="click: function () {remove('tasks', id)}" href="#" class="card-link text-danger">Удалить</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         <!-- /ko -->
                     </div>
         </div>
@@ -109,6 +137,7 @@
                     <span>Название задачи</span>
                     <input data-bind="value: storage.get('tasks').tasktitle;" type="text" class="form-control">
                 </label>
+                <div data-bind="template: {name: 'file-upload-form', data: 'tasks'}"></div>
                 <div data-bind="foreach: viewModel.inputsArr">
                     <!-- ko if: $data === 'taskdate' -->
                     <div class="d-flex align-items-center">
@@ -143,8 +172,16 @@
                 <div data-bind="visible: viewModel.taskCategoryVisible;" style="display: none">
                     <div class="d-flex align-items-center">
                             <label class="form-label w-100 mb-3">
-                                <span>Название категории:</span>
-                                <input data-bind="value: storage.get('tasks_categories').title" type="text" class="form-control">
+                                    <div class="form-floating">
+                                    <select data-bind="value: storage.get('tasks_categories').title" class="form-select" id="floatingSelect">
+                                        <!-- ko foreach: viewModel.tasks_categories -->
+                                            <option data-bind="text: title"></option>
+                                        <!-- /ko -->
+                                    </select>
+                                    <label for="floatingSelect">Категория:</label>
+                                    </div>
+                                <!-- <span>Название категории:</span>
+                                <input data-bind="value: storage.get('tasks_categories').title" type="text" class="form-control"> -->
                             </label>
                             <label class="form-label w-100 mb-3">
                                 <span>Цвет категории:</span>
@@ -185,8 +222,6 @@
                             <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
                         </svg>
                     </a>
-
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
@@ -194,6 +229,7 @@
                 <button data-bind="click: function () {
                         storage.get('tasks').project_id(0);
                         storage.get('tasks').status('open');
+                        storage.get('tasks').attachments(storage.get('attachments').id());
                         if (storage.get('tasks_categories').title() !== '') {
                             set('tasks_categories', storage.get('tasks_categories'), function (res) {
                                 storage.get('tasks').category_id(res);
@@ -254,7 +290,55 @@
             return finalElem;
         })
     )
+    viewModel.filter.tasks.status('open');
 
+</script>
+
+<script type="text/html" id="file-upload-form">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div id="drag-and-drop-zone" class="dm-uploader p-5">
+                <h3 class="mb-5 mt-5 text-muted">Drag &amp; drop files here</h3>
+
+                <div class="btn btn-primary btn-block mb-5">
+                    <span>Open the file Browser</span>
+                    <input type="file" title='Click to add Files' />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="card h-100">
+                <div class="card-header">
+                    File List
+                </div>
+
+                <ul class="list-unstyled p-2 d-flex flex-column col" id="files">
+                    <li class="text-muted text-center empty">No files uploaded.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</script>
+<script type="text/html" id="files-template">
+    <li class="media">
+        <div class="media-body mb-1">
+            <p class="mb-2">
+                <strong>%%filename%%</strong> - Status: <span class="text-muted">Waiting</span>
+            </p>
+            <div class="progress mb-2">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+                     role="progressbar"
+                     style="width: 0%"
+                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+            <hr class="mt-1 mb-1" />
+        </div>
+    </li>
+</script>
+<script type="text/html" id="debug-template">
+    <li class="list-group-item text-%%color%%"><strong>%%date%%</strong>: %%message%%</li>
 </script>
 
 <?php require_once "components/footer.php"?>

@@ -180,7 +180,7 @@ function search(name, key, value) {
         data: { data: data, action: 'search' },
         success: function (response) {
             var jsonData = JSON.parse(response);
-            jsonData.forEach( function (elem) {
+            jsonData.forEach(function (elem) {
                 for (let key in elem) {
                     if (typeof elem[key] !== 'function') {
                         elem[key] = ko.observable(elem[key]);

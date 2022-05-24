@@ -49,6 +49,9 @@ if ($url !== '') {
             for (let i in viewModel.filter[key]) {
                 viewModel.filter[key][i] = ko.observable('');
                 viewModel.filter[key][i].subscribe(function (value) {
+                    if(typeof value === 'undefined') {
+                        value = ko.observable('');
+                    }
                     search(i, key, value);
                 })
             }

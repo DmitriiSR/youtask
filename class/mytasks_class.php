@@ -12,6 +12,8 @@ class pageClass extends MainClass {
             "tasks_categories" => $this->getItemsByUserId('tasks_categories'),
             "skeleton_tasks_categories" => $this->getSkeleton('tasks_categories'),
             "search_tasks_categories" => $this->setSearching('tasks_categories'),
+            "skeleton_attachments" => $this->getSkeleton('attachments'),
+            "attachments" => $this->getItemsByUserId('attachments'),
         );
         return json_encode($action);
     }

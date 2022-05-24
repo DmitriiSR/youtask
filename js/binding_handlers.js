@@ -1,6 +1,6 @@
 
 ko.bindingHandlers.multiselect = {
-    update: function(element, valueAccessor) {
+    update: function (element, valueAccessor) {
         var value = valueAccessor();
         element.multiple = 'true';
 
